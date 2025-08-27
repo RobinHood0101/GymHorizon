@@ -3,29 +3,29 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('index');
+    return ['Laravel' => app()->version()];
 });
-Route::get('/index', function () {
-    return view('index');
-});
-Route::get('/anatomie', function () {
-    return view('anatomie');
-});
-Route::get('/ernaehrung', function () {
-    return view('ernaehrung');
-});
-Route::get('/login', function () {
-    return view('login');
-});
-Route::get('/register', function () {
-    return view('register');
-});
-Route::get('/tipps', function () {
-    return view('tipps');
-});
-Route::get('/uebungen', function () {
-    return view('uebungen');
-});
-Route::get('/plan', function () {
-    return view('plan');
+
+require __DIR__.'/auth.php';
+
+Route::get('/', function () {
+    return view('home');
+})->name('home');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/anatomie', function () {
+        return view('anatomie');
+    });
+    Route::get('/ernaehrung', function () {
+        return view('ernaehrung');
+    });
+    Route::get('/tipps', function () {
+        return view('tipps');
+    });
+    Route::get('/uebungen', function () {
+        return view('uebungen');
+    });
+    Route::get('/plan', function () {
+        return view('plan');
+    });
 });
