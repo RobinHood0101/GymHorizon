@@ -11,7 +11,7 @@
                 <li class="nav-item"><a class="nav-link {{ request()->is('uebungen') ? 'text-white' : ''}}" href="uebungen" style="color: var(--bs-navbar-color);">Übungen</a></li>
                 <li class="nav-item"><a class="nav-link {{ request()->is('tipps') ? 'text-white' : ''}}" href="tipps" style="color: var(--bs-navbar-color);">Tipps</a></li>
                 <li class="nav-item"><a class="nav-link {{ request()->is('ernaehrung') ? 'text-white' : ''}}" href="ernaehrung" style="color: var(--bs-navbar-color);">Ernährung</a></li>
-                <li class="nav-item"><a class="nav-link {{ request()->is('plan') ? 'text-white' : ''}}" href="plan" style="color: var(--bs-navbar-color);">Gym Pläne</a></li>
+                <li class="nav-item"><a class="nav-link {{ request()->is('plan') ? 'text-white' : ''}}" href="plan" style="color: var(--bs-navbar-color);">Trainingspläne</a></li>
                 <li class="nav-item"><a class="nav-link {{ request()->is('anatomie') ? 'text-white' : ''}}" href="anatomie">Anatomie</a></li>
             </ul>
             @guest

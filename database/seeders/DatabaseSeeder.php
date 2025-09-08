@@ -2,8 +2,15 @@
 
 namespace Database\Seeders;
 
+use App\Models\DayPlan;
+use App\Models\Exercise;
+use App\Models\Nutrition;
+use App\Models\Plan;
+use App\Models\Tip;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\WeekPlan;
+use Database\Factories\DayPlanFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,11 +20,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Create user with php please make:user
+//        User::factory()->create([
+//            'name' => 'robin',
+//            'email' => 'robin@localhost',
+//            'password' => 'robin123',
+//        ]);
+        User::factory(10)->create();
+        Plan::factory(10)->create();
+        DayPlan::factory(10)->create();
+        WeekPlan::factory(10)->create();
+        Exercise::factory(10)->create();
     }
 }

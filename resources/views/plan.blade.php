@@ -19,7 +19,7 @@
 <body>
 @include('components/header')
 <header>
-    <h1 style="padding: 15px;text-align: center;">Gym Plan</h1>
+    <h1 style="padding: 15px;text-align: center;">Trainingspläne</h1>
 </header>
 <main style="padding: 70px;">
     <div class="table-responsive">

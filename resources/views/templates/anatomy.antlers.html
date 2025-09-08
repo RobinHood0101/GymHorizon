@@ -1,0 +1,14 @@
+{{ collection:anatomy }}
+<section style="min-width: 800px;padding: 50px;">
+    <h2>{{ title }}</h2>
+    {{ if image }}
+    {{ image }}
+    <figure class="figure"><img class="rounded figure-img shadow" data-bs-toggle="tooltip" data-bss-tooltip=""
+                                src="{{ url }}" style="height: auto;width: 100%;display: block;"
+                                title="Muskelgruppen">
+        <figcaption class="figure-caption">{{ content }}</figcaption>
+    </figure>
+    {{ /image }}
+    {{ /if }}
+</section>
+{{ /collection:anatomy }}

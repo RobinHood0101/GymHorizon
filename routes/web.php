@@ -14,16 +14,16 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/anatomie', function () {
-        return view('anatomie');
+        return view('anatomy');
     });
     Route::get('/ernaehrung', function () {
-        return view('ernaehrung');
+        return view('nutrition');
     });
     Route::get('/tipps', function () {
-        return view('tipps');
+        return view('tips');
     });
     Route::get('/uebungen', function () {
-        return view('uebungen');
+        return view('exercises');
     });
     Route::get('/plan', function () {
         return view('plan');

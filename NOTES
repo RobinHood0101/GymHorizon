@@ -1,0 +1,7 @@
+- Wochenplan hinzufügen
+- Fortschrittstracker
+- Gewichtstracker
+-
+
+
+admin user setzten  DB::table('users')->where('id', 1)->update(['super' => 1]);
