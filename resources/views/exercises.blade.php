@@ -1,14 +1,17 @@
 @php
     use App\Models\Exercise;
+    use App\Models\ExerciseCategory;
+
     $exercises = Exercise::all();
+    $exerciseCategories = ExerciseCategory::all();
 @endphp
-<!DOCTYPE html>
+        <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>GymHorizon</title>
+    <title>Übungen | Gymhorizon</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Advanced-NavBar---Multi-dropdown.css">
     <link rel="stylesheet" href="assets/css/Bootstrap-DataTables.css">
@@ -26,100 +29,38 @@
     <h1 style="padding: 15px;text-align: center;">Übungen</h1>
 </header>
 <main>
-    <section style="padding: 50px;">
-        <h2>Beine</h2>
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                <tr style="background: var(--bs-table-border-color);">
-                    <th style="background: var(--bs-table-striped-bg);">Übung</th>
-                    <th style="background: var(--bs-table-striped-bg);">Bemerkung</th>
-                    <th style="background: var(--bs-table-striped-bg);">Gewicht</th>
-                    <th style="background: var(--bs-table-striped-bg);">Wiederholung</th>
-                    <th style="background: var(--bs-table-striped-bg);">Sätze</th>
-                    <th style="background: var(--bs-table-striped-bg);">Ort</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($exercises as $exercise)
-                    <tr>
-                        <td>{{ $exercise['exercise_name'] }}</td>
-                        <td>{{ $exercise['description'] }}</td>
-                        <td>{{ $exercise['weight'] }}</td>
-                        <td>{{ $exercise['repetitions'] }}</td>
-                        <td>{{ $exercise['sets'] }}</td>
-                        <td>{{ $exercise['place'] }}</td>
+    @foreach($exerciseCategories as $exerciseCategory)
+        <section style="padding: 50px;">
+            <h2>{{ $exerciseCategory->category_name }}</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr style="background: var(--bs-table-border-color);">
+                        <th style="background: var(--bs-table-striped-bg);">Übung</th>
+                        <th style="background: var(--bs-table-striped-bg);">Bemerkung</th>
+                        <th style="background: var(--bs-table-striped-bg);">Gewicht</th>
+                        <th style="background: var(--bs-table-striped-bg);">Wiederholung</th>
+                        <th style="background: var(--bs-table-striped-bg);">Sätze</th>
+                        <th style="background: var(--bs-table-striped-bg);">Raum</th>
+                        <th style="background: var(--bs-table-striped-bg);">Nr.</th>
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </div>
-    </section>
-    <section style="padding: 50px;">
-        <h2>Arme</h2>
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                <tr style="background: var(--bs-table-border-color);">
-                    <th style="background: var(--bs-table-striped-bg);">Übung</th>
-                    <th style="background: var(--bs-table-striped-bg);">Bemerkung</th>
-                    <th style="background: var(--bs-table-striped-bg);">Gewicht</th>
-                    <th style="background: var(--bs-table-striped-bg);">Wiederholung</th>
-                    <th style="background: var(--bs-table-striped-bg);">Sätze</th>
-                    <th style="background: var(--bs-table-striped-bg);">Raum</th>
-                    <th style="background: var(--bs-table-striped-bg);">Nr.</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Beinpresse</td>
-                    <td></td>
-                    <td>80</td>
-                    <td>12</td>
-                    <td>3</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Beinpresse</td>
-                    <td></td>
-                    <td>80</td>
-                    <td>12</td>
-                    <td>3</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Beinpresse</td>
-                    <td></td>
-                    <td>80</td>
-                    <td>12</td>
-                    <td>3</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Beinpresse</td>
-                    <td></td>
-                    <td>80</td>
-                    <td>12</td>
-                    <td>3</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Beinpresse</td>
-                    <td></td>
-                    <td>80</td>
-                    <td>12</td>
-                    <td>3</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
+                    </thead>
+                    <tbody>
+                    @foreach($exerciseCategory->exercises as $exercise)
+                        <tr>
+                            <td>{{ $exercise['exercise_name'] }}</td>
+                            <td>{{ $exercise['description'] }}</td>
+                            <td>{{ $exercise['weight'] }}</td>
+                            <td>{{ $exercise['repetitions'] }}</td>
+                            <td>{{ $exercise['sets'] }}</td>
+                            <td>{{ $exercise['place'] }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    @endforeach
 </main>
 
 <x-footer></x-footer>

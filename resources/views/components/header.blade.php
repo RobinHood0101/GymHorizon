@@ -8,11 +8,12 @@
                     </svg></span><span>GymHorizon</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-5"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navcol-5">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link {{ request()->is('uebungen') ? 'text-white' : ''}}" href="uebungen" style="color: var(--bs-navbar-color);">Übungen</a></li>
                 <li class="nav-item"><a class="nav-link {{ request()->is('tipps') ? 'text-white' : ''}}" href="tipps" style="color: var(--bs-navbar-color);">Tipps</a></li>
                 <li class="nav-item"><a class="nav-link {{ request()->is('ernaehrung') ? 'text-white' : ''}}" href="ernaehrung" style="color: var(--bs-navbar-color);">Ernährung</a></li>
-                <li class="nav-item"><a class="nav-link {{ request()->is('plan') ? 'text-white' : ''}}" href="plan" style="color: var(--bs-navbar-color);">Trainingspläne</a></li>
                 <li class="nav-item"><a class="nav-link {{ request()->is('anatomie') ? 'text-white' : ''}}" href="anatomie">Anatomie</a></li>
+                <li class="nav-item"><a class="nav-link {{ request()->is('uebungen') ? 'text-white' : ''}}" href="uebungen" style="color: var(--bs-navbar-color);">Übungen</a></li>
+                <li class="nav-item"><a class="nav-link {{ request()->is('wochenplan') ? 'text-white' : ''}}" href="wochenplan" style="color: var(--bs-navbar-color);">Wochenplan</a></li>
+                <li class="nav-item"><a class="nav-link {{ request()->is('trainingsplan') ? 'text-white' : ''}}" href="trainingsplan" style="color: var(--bs-navbar-color);">Trainingsplan</a></li>
             </ul>
             @guest
                 <a class="btn btn-primary ms-md-2" role="button" href="register">Registrieren</a><a class="btn btn-primary ms-md-2" role="button" href="login">Einloggen</a>
