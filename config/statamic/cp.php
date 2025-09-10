@@ -54,6 +54,11 @@ return [
 
     'widgets' => [
         'getting_started',
+        [
+            'type' => 'collection',
+            'collection' => 'nutrition',
+            'limit' => 10,
+        ]
     ],
 
     /*

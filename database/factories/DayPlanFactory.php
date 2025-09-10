@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\DayPlan;
+use App\Models\Plan;
 
 class DayPlanFactory extends Factory
 {
@@ -22,7 +23,7 @@ class DayPlanFactory extends Factory
     {
         return [
             'day' => fake()->date(),
-            'plan_id' => fake()->word(),
+            'plan_id' => Plan::factory(),
         ];
     }
 }

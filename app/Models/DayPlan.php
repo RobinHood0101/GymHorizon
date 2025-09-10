@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class DayPlan extends Model
 {
@@ -31,6 +31,7 @@ class DayPlan extends Model
         return [
             'id' => 'integer',
             'day' => 'date',
+            'plan_id' => 'integer',
         ];
     }
 
@@ -39,8 +40,8 @@ class DayPlan extends Model
         return $this->belongsToMany(WeekPlan::class);
     }
 
-    public function plan(): HasOne
+    public function plan(): BelongsTo
     {
-        return $this->hasOne(Plan::class);
+        return $this->belongsTo(Plan::class);
     }
 }

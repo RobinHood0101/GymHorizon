@@ -37,9 +37,11 @@ class Plan extends Model
         ];
     }
 
-    public function exercises(): HasMany
+    public function exercises(): BelongsToMany
     {
-        return $this->hasMany(Exercise::class);
+        return $this->belongsToMany(Exercise::class)
+            ->withPivot(['weight', 'repetitions', 'sets'])
+            ->withTimestamps();
     }
 
     public function user(): BelongsTo
@@ -47,8 +49,8 @@ class Plan extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function dayPlans(): BelongsToMany
+    public function dayPlans(): HasMany
     {
-        return $this->belongsToMany(DayPlan::class);
+        return $this->hasMany(DayPlan::class);
     }
 }
