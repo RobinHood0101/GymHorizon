@@ -11,21 +11,24 @@ require __DIR__.'/auth.php';
 Route::get('/', function () {
     return view('home');
 })->name('home');
+Route::get('/anatomie', function () {
+    return view('anatomy');
+});
+Route::get('/ernaehrung', function () {
+    return view('nutrition');
+});
+Route::get('/tipps', function () {
+    return view('tips');
+});
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/anatomie', function () {
-        return view('anatomy');
-    });
-    Route::get('/ernaehrung', function () {
-        return view('nutrition');
-    });
-    Route::get('/tipps', function () {
-        return view('tips');
-    });
     Route::get('/uebungen', function () {
-        return view('exercises');
+            return view('exercises');
     });
-    Route::get('/plan', function () {
-        return view('plan');
+    Route::get('/wochenplan', function () {
+        return view('weekPlan');
+    });
+    Route::get('/trainingsplan', function () {
+        return view('trainingPlan');
     });
 });

@@ -12,6 +12,7 @@
         "statamic/cms": "^5.64"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.16",
         "fakerphp/faker": "^1.23",
         "laravel-shift/blueprint": "^2.12",
         "laravel/breeze": "^2.3",
