@@ -15,9 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('exercise_name');
             $table->text('description')->nullable();
-            $table->integer('weight')->nullable();
-            $table->integer('repetitions')->nullable();
-            $table->integer('sets')->nullable();
             $table->string('place')->nullable();
             $table->foreignId('exercise_category_id');
             $table->timestamps();

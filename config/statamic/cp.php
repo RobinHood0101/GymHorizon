@@ -53,10 +53,19 @@ return [
     */
 
     'widgets' => [
-        'getting_started',
         [
             'type' => 'collection',
             'collection' => 'nutrition',
+            'limit' => 10,
+        ],
+        [
+            'type' => 'collection',
+            'collection' => 'anatomy',
+            'limit' => 10,
+        ],
+        [
+            'type' => 'collection',
+            'collection' => 'tips',
             'limit' => 10,
         ]
     ],

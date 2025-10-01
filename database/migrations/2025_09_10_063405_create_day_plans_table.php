@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('day_plans', function (Blueprint $table) {
             $table->id();
-            $table->date('day');
+            $table->string('day');
+            $table->string('notes')->nullable();
             $table->foreignId('plan_id');
+            $table->foreignId('week_plan_id');
             $table->timestamps();
         });
     }

@@ -19,9 +19,6 @@ class Exercise extends Model
     protected $fillable = [
         'exercise_name',
         'description',
-//        'weight',
-//        'repetitions',
-//        'sets',
         'place',
         'exercise_category_id',
     ];

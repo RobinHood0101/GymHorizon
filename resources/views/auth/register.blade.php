@@ -16,7 +16,7 @@
 </head>
 
 <body>
-@include('components/header')
+<x-header></x-header>
     <section class="position-relative py-4 py-xl-5">
         <div class="container">
             <div class="row mb-5">

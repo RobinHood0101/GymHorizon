@@ -1,7 +1,12 @@
-- Wochenplan hinzufügen
 - Fortschrittstracker
 - Gewichtstracker
--
+- News letter
 
 
-admin user setzten  DB::table('users')->where('id', 1)->update(['super' => 1]);
+    weight: integer nullable
+    repetitions: integer nullable
+    sets: integer nullable
+
+    müssen in die Pivot Tabelle, da ein Plan unterschiedliche Gewichte... hat
+
+livewire nutzen

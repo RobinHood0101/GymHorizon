@@ -17,7 +17,8 @@
 </head>
 
 <body>
-@include('components/header')
+<x-header></x-header>
+
 @include('templates/nutrition')
 
 <x-footer></x-footer>

@@ -17,9 +17,9 @@
 </head>
 
 <body>
-@include('components/header')
+<x-header></x-header>
 <header>
-    <h1 style="padding: 15px;text-align: center;">Allgemeine Tipps</h1>
+    <h1 style="padding: 15px;text-align: center;">Tipps</h1>
 </header>
 <main>
     @include('templates/tips')

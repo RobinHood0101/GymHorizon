@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\ExerciseCategoryController;
+use App\Http\Controllers\ExerciseController;
+use App\Http\Controllers\PlanController;
+use App\Http\Controllers\WeekPlanController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -22,13 +26,8 @@ Route::get('/tipps', function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/uebungen', function () {
-            return view('exercises');
-    });
-    Route::get('/wochenplan', function () {
-        return view('weekPlan');
-    });
-    Route::get('/trainingsplan', function () {
-        return view('trainingPlan');
-    });
+    Route::resource('uebungen', ExerciseController::class);
+    Route::resource('exercise-categories', ExerciseCategoryController::class);
+    Route::resource('wochenplan', WeekPlanController::class);
+    Route::resource('trainingsplan', PlanController::class);
 });

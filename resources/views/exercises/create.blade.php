@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Übungen | Gymhorizon</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/Advanced-NavBar---Multi-dropdown.css">
+    <link rel="stylesheet" href="/assets/css/Bootstrap-DataTables.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/css/NAV-1.css">
+    <link rel="stylesheet" href="/assets/css/Navbar-Right-Links-Dark-icons.css">
+    <link rel="stylesheet" href="/assets/css/Projects-Grid-Horizontal-images.css">
+    <link rel="stylesheet" href="/assets/css/Video-Parallax-Background-v2-multiple-parallax.css">
+</head>
+
+<body>
+<x-header></x-header>
+<header>
+    <h1 style="padding: 15px;text-align: center;">Übung erstellen für {{ $category->category_name }}</h1>
+</header>
+<main style="padding: 70px;">
+    <form action="{{ route('uebungen.store') }}" method="POST">
+        @csrf
+
+        <label class="form-label" for="name">Name</label>
+        <input class="form-control" type="text" name="name" id="name" required/>
+
+        <label class="form-label" for="description">Beschreibung</label>
+        <input class="form-control" type="text" name="description" id="description"/>
+
+        <label class="form-label" for="weight">Gewicht</label>
+        <input class="form-control" type="number" name="weight" id="weight"/>
+
+        <label class="form-label" for="repetitions">Wiederholungen</label>
+        <input class="form-control" type="number" name="repetitions" id="repetitions"/>
+
+        <label class="form-label" for="sets">Sätze</label>
+        <input class="form-control" type="number" name="sets" id="sets"/>
+
+        <label class="form-label" for="place">Ort</label>
+        <input class="form-control" type="text" name="place" id="place"/>
+
+        <input type="hidden" name="category_id" value="{{ $category->id }}"/>
+
+        <input class="btn btn-primary" type="submit" value="Erstellen"/>
+        @if ($errors->any())
+            <div class="mt-3 text-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+    </form>
+    <a href="{{ route('wochenplan.index') }}" class="btn btn-secondary mt-3">Zurück</a>
+</main>
+
+<x-footer></x-footer>
+
+<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/js/bs-init.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script src="/assets/js/Bootstrap-DataTables-main.js"></script>
+<script src="/assets/js/Advanced-NavBar---Multi-dropdown-main.js"></script>
+<script src="/assets/js/Video-Parallax-Background-v2-multiple-parallax.js"></script>
+</body>
+
+</html>

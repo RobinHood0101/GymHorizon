@@ -34,7 +34,7 @@
     <h1 style="padding: 15px;text-align: center;">Übungen</h1>
 </header>
 <main style="padding: 70px;">
-    <a href="{{ route('home') }}" class="btn btn-primary mt-3">
+    <a href="{{ route('exercise-categories.create') }}" class="btn btn-primary mt-3">
         Neue Kategorie erstellen
     </a>
     @foreach($exerciseCategories as $exerciseCategory)
@@ -67,7 +67,8 @@
                     </tbody>
                 </table>
             </div>
-            <a href="{{ route('home') }}" class="btn btn-primary mt-3">
+{{--            {{ dd($exercise->exerciseCategory) }}--}}
+            <a href="{{ route('uebungen.create') }}?category={{ $exercise->exerciseCategory->id }}" class="btn btn-primary mt-3">
                 Neue Übung zu {{ $exerciseCategory->category_name }} hinzufügen
             </a>
         </section>

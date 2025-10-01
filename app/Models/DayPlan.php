@@ -18,6 +18,7 @@ class DayPlan extends Model
      */
     protected $fillable = [
         'day',
+        'notes',
         'plan_id',
     ];
 
@@ -30,14 +31,13 @@ class DayPlan extends Model
     {
         return [
             'id' => 'integer',
-            'day' => 'date',
-            'plan_id' => 'integer',
+            'training_plan_id' => 'integer',
         ];
     }
 
-    public function weekPlans(): BelongsToMany
+    public function weekPlans(): BelongsTo
     {
-        return $this->belongsToMany(WeekPlan::class);
+        return $this->belongsTo(WeekPlan::class);
     }
 
     public function plan(): BelongsTo
