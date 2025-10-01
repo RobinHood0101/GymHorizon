@@ -1,0 +1,16 @@
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: text_field
+            field:
+              type: text
+              display: 'Text Field'
+          -
+            handle: textarea_field
+            field:
+              type: textarea
+              display: 'Textarea Field'
