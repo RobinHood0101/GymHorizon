@@ -22,7 +22,7 @@
     <h1 style="padding: 15px;text-align: center;">Anatomie</h1>
 </header>
 <main>
-    @include('templates/anatomy')
+    @include('statamic/anatomy')
 
 
 </main>

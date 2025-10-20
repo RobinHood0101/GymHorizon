@@ -22,7 +22,7 @@
     <h1 style="padding: 15px;text-align: center;">Tipps</h1>
 </header>
 <main>
-    @include('templates/tips')
+    @include('statamic/tips')
 </main>
 
 <x-footer></x-footer>
