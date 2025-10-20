@@ -23,7 +23,7 @@ class WeekPlanFactory extends Factory
     {
         return [
             'title' => fake()->sentence(4),
-            'user_id' => User::factory(),
+            'user_id' => 1,
         ];
     }
 }

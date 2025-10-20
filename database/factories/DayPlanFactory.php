@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\WeekPlan;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\DayPlan;
@@ -23,7 +24,9 @@ class DayPlanFactory extends Factory
     {
         return [
             'day' => fake()->date(),
+            'notes' => fake()->text(),
             'plan_id' => Plan::factory(),
+            'week_plan_id' => WeekPlan::factory(),
         ];
     }
 }

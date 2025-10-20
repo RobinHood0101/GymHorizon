@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('exercise_name');
             $table->text('description')->nullable();
             $table->string('place')->nullable();
-            $table->foreignId('exercise_category_id');
+            $table->foreignId('exercise_category_id')->constrained('exercise_categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

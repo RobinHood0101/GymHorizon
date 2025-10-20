@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('plan_name');
             $table->string('duration')->nullable();
             $table->text('notes')->nullable();
-            $table->foreignId('user_id');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

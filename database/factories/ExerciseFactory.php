@@ -24,9 +24,6 @@ class ExerciseFactory extends Factory
         return [
             'exercise_name' => fake()->word(),
             'description' => fake()->text(),
-            'weight' => fake()->numberBetween(-10000, 10000),
-            'repetitions' => fake()->numberBetween(-10000, 10000),
-            'sets' => fake()->numberBetween(-10000, 10000),
             'place' => fake()->word(),
             'exercise_category_id' => ExerciseCategory::factory(),
         ];

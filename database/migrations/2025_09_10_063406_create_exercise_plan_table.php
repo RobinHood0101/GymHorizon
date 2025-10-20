@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('exercise_plan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('exercise_id');
-            $table->foreignId('plan_id');
+            $table->foreignId('exercise_id')->constrained('exercises')->onDelete('cascade');
+            $table->foreignId('plan_id')->constrained('plans')->onDelete('cascade');
             $table->integer('weight')->nullable();
             $table->integer('repetitions')->nullable();
             $table->integer('sets')->nullable();

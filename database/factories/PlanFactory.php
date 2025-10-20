@@ -25,7 +25,7 @@ class PlanFactory extends Factory
             'plan_name' => fake()->word(),
             'duration' => fake()->word(),
             'notes' => fake()->text(),
-            'user_id' => User::factory(),
+            'user_id' => 1,
         ];
     }
 }
