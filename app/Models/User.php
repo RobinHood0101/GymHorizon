@@ -46,9 +46,9 @@ class User extends Authenticatable
         ];
     }
 
-    public function plans(): HasMany
+    public function trainingPlans(): HasMany
     {
-        return $this->hasMany(Plan::class);
+        return $this->hasMany(TrainingPlan::class);
     }
 
     public function weekPlans(): HasMany

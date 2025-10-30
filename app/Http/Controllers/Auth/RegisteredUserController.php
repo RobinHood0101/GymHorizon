@@ -39,6 +39,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return response()->view('home');
+        return response()->view('home', ['first_login' => true]);
     }
 }

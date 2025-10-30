@@ -19,26 +19,17 @@
 <body>
 <x-header></x-header>
 <header>
-    <h1 style="padding: 15px;text-align: center;">Übung erstellen für {{ $category->category_name }}</h1>
+    <h1 style="padding: 15px;text-align: center;">Übung erstellen für {{ $category->name }}</h1>
 </header>
 <main style="padding: 70px;">
-    <form action="{{ route('uebungen.store') }}" method="POST">
+    <form action="{{ route('exercises.store') }}" method="POST">
         @csrf
 
         <label class="form-label" for="name">Name</label>
-        <input class="form-control" type="text" name="name" id="name" required/>
+        <input class="form-control" type="text" name="name" id="name" required autofocus/>
 
         <label class="form-label" for="description">Beschreibung</label>
         <input class="form-control" type="text" name="description" id="description"/>
-
-        <label class="form-label" for="weight">Gewicht</label>
-        <input class="form-control" type="number" name="weight" id="weight"/>
-
-        <label class="form-label" for="repetitions">Wiederholungen</label>
-        <input class="form-control" type="number" name="repetitions" id="repetitions"/>
-
-        <label class="form-label" for="sets">Sätze</label>
-        <input class="form-control" type="number" name="sets" id="sets"/>
 
         <label class="form-label" for="place">Ort</label>
         <input class="form-control" type="text" name="place" id="place"/>
@@ -56,7 +47,7 @@
             </div>
         @endif
     </form>
-    <a href="{{ route('wochenplan.index') }}" class="btn btn-secondary mt-3">Zurück</a>
+    <a href="{{ route('exercises.index') }}" class="btn btn-secondary mt-3">Zurück</a>
 </main>
 
 <x-footer></x-footer>

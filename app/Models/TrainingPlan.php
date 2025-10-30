@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Plan extends Model
+class TrainingPlan extends Model
 {
     use HasFactory;
 
@@ -18,7 +18,7 @@ class Plan extends Model
      * @var array
      */
     protected $fillable = [
-        'plan_name',
+        'name',
         'duration',
         'notes',
         'user_id',

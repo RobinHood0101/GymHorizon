@@ -15,67 +15,74 @@
     <link rel="stylesheet" href="/assets/css/Projects-Grid-Horizontal-images.css">
     <link rel="stylesheet" href="/assets/css/Video-Parallax-Background-v2-multiple-parallax.css">
     <style>
-        section {
-            margin-top: 40px;
+        main {
+            padding: 2rem 1rem;
         }
-        .alert {
-            margin-top: 20px;
+
+        .weekplan-card {
+            margin-bottom: 2rem;
         }
     </style>
 </head>
 
 <body>
 <x-header></x-header>
-<header>
-    <h1 style="padding: 15px;text-align: center;">Wochenplan</h1>
+<header class="text-center my-4">
+    <h1>Wochenplan</h1>
 </header>
-<main style="padding: 70px;">
+<main class="container">
     @if(session('success'))
-        <div class="alert alert-success">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Schließen"></button>
         </div>
     @endif
-    <a href="{{ route('wochenplan.create') }}" class="btn btn-primary mt-3">
-        Neuen Wochenplan erstellen
-    </a>
+    <div class="mb-4 text-center">
+        <a href="{{ route('week-plans.create') }}" class="btn btn-primary btn-lg">
+            Neuen Wochenplan erstellen
+        </a>
+    </div>
     @if($weekPlans->isEmpty())
         <div class="alert alert-info" role="alert">
             Noch keine Wochenpläne vorhanden.
         </div>
     @endif
     @foreach($weekPlans as $weekplan)
-        <section>
-            <h2>{{ $weekplan->title }}</h2>
-            <div>
-                <a href="{{ route('wochenplan.edit', $weekplan->id) }}" class="btn btn-warning btn-sm">Bearbeiten</a>
-
-                <form action="{{ route('wochenplan.destroy', $weekplan->id) }}" method="POST" style="display:inline-block;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
-                </form>
-            </div>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Tag</th>
-                        <th>Trainingsplan</th>
-                        <th>Notizen</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($weekplan->dayPlans as $dayPlan)
+        <div class="card weekplan-card shadow-sm">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <h2 class="card-title">{{ $weekplan->title }}</h2>
+                    <div class="d-flex flex-column gap-2">
+                        <a href="{{ route('week-plans.edit', $weekplan->id) }}" class="btn btn-warning btn-sm">Bearbeiten</a>
+                        <form action="{{ route('week-plans.destroy', $weekplan->id) }}" method="POST" class="m-0">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <thead class="table-light">
                         <tr>
-                            <td>{{ $dayPlan->day }}</td>
-                            <td>{{ $dayPlan->plan->plan_name ?? '' }}</td>
-                            <td>{{ $dayPlan->notes }}</td>
+                            <th>Tag</th>
+                            <th>Trainingsplan</th>
+                            <th>Notizen</th>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @foreach($weekplan->dayPlans as $dayPlan)
+                            <tr>
+                                <td>{{ $dayPlan->day }}</td>
+                                <td>{{ $dayPlan->trainingPlan->name ?? 'Rest Day' }}</td>
+                                <td>{{ $dayPlan->notes }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </section>
+        </div>
     @endforeach
 </main>
 

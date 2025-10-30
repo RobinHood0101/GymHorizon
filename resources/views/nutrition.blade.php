@@ -19,7 +19,7 @@
 <body>
 <x-header></x-header>
 
-@include('templates/nutrition')
+@include('statamic/nutrition')
 
 <x-footer></x-footer>
 

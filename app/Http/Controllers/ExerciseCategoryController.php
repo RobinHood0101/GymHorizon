@@ -29,14 +29,14 @@ class ExerciseCategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255|unique:exercise_categories,category_name',
+            'name' => 'required|string|max:255|unique:exercise_categories,name',
         ]);
 
         ExerciseCategory::create([
-            'category_name' => $request->name,
+            'name' => $request->name,
         ]);
 
-        return redirect()->route('uebungen.index')->with('success', 'Übungskategorie erfolgreich erstellt!');
+        return redirect()->route('exercises.index')->with('success', 'Übungskategorie erfolgreich erstellt!');
     }
 
     /**
@@ -52,7 +52,7 @@ class ExerciseCategoryController extends Controller
      */
     public function edit(ExerciseCategory $exerciseCategory)
     {
-        //
+        return view('exerciseCategories.edit', compact('exerciseCategory'));
     }
 
     /**
@@ -60,7 +60,15 @@ class ExerciseCategoryController extends Controller
      */
     public function update(Request $request, ExerciseCategory $exerciseCategory)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255|unique:exercise_categories,name,' . $exerciseCategory->id,
+        ]);
+
+        $exerciseCategory->update([
+            'name' => $request->name,
+        ]);
+
+        return redirect()->route('exercises.index')->with('success', 'Übungskategorie erfolgreich aktualisiert!');
     }
 
     /**
@@ -68,6 +76,8 @@ class ExerciseCategoryController extends Controller
      */
     public function destroy(ExerciseCategory $exerciseCategory)
     {
-        //
+        $exerciseCategory->forceDelete();
+
+        return redirect()->route('exercises.index')->with('success', 'Übungskategorie erfolgreich gelöscht!');
     }
 }

@@ -16,9 +16,17 @@
     <link rel="stylesheet" href="assets/css/Projects-Grid-Horizontal-images.css">
     <link rel="stylesheet" href="assets/css/Video-Parallax-Background-v2-multiple-parallax.css">
 </head>
-
 <body>
+{{--@if(isset($first_login))
+    <div id="startingGuide">
+        <h1>Quick start guide</h1>
+        <p>this helps to start with gymhorizon</p>
+    </div>
+@endif--}}
 <x-header></x-header>
+@if(isset($first_login))
+    <x-guide></x-guide>
+@endif
 <section>
     <div data-bss-parallax-bg="true" style="height: 600px;background: url(&quot;assets/img/gym.jpg&quot;);">
         <div class="container h-100">
@@ -56,7 +64,7 @@
                 </div>
                 <div>
                     <h4>Übungen</h4>
-                    <p>Erstelle neue Übungen</p><a href="uebungen">Mehr erfahren&nbsp;<svg
+                    <p>Erstelle neue Übungen</p><a href="{{ route('exercises.index') }}">Mehr erfahren&nbsp;<svg
                                 xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
                                 viewBox="0 0 16 16" class="bi bi-arrow-right">
                             <path fill-rule="evenodd"
@@ -71,7 +79,7 @@
                     <i class="icon ion-information"></i></div>
                 <div>
                     <h4>Tipps</h4>
-                    <p>Viele Verschiedene Fitness-Tipps</p><a href="tipps">Mehr erfahren&nbsp;<svg
+                    <p>Viele Verschiedene Fitness-Tipps</p><a href="{{ route('tips') }}">Mehr erfahren&nbsp;<svg
                                 xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
                                 viewBox="0 0 16 16" class="bi bi-arrow-right">
                             <path fill-rule="evenodd"
@@ -86,7 +94,7 @@
                     <i class="icon ion-android-restaurant"></i></div>
                 <div>
                     <h4>Ernährung</h4>
-                    <p><br>Finde heraus welche Ernährung dich zu deinen Zielen führt<br><br></p><a href="ernaehrung">Mehr
+                    <p><br>Finde heraus welche Ernährung dich zu deinen Zielen führt<br><br></p><a href="{{ route('nutrition') }}">Mehr
                         erfahren&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
                                            fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-right">
                             <path fill-rule="evenodd"
@@ -114,8 +122,8 @@
                     </svg>
                 </div>
                 <div>
-                    <h4>Gym Pläne</h4>
-                    <p>Erstelle deine eigenen Pläne</p><a href="{{ route('trainingsplan.index') }}">Mehr erfahren&nbsp;<svg
+                    <h4>Trainingspläne</h4>
+                    <p>Erstelle deine eigenen Pläne</p><a href="{{ route('training-plans.index') }}">Mehr erfahren&nbsp;<svg
                                 xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
                                 viewBox="0 0 16 16" class="bi bi-arrow-right">
                             <path fill-rule="evenodd"
@@ -130,7 +138,8 @@
                     <i class="icon ion-ios-body"></i></div>
                 <div>
                     <h4>Anatomie</h4>
-                    <p>Es ist wichtig zu wissen, wie dein Körper funktioniert.</p><a href="anatomie">Mehr erfahren&nbsp;<svg
+                    <p>Es ist wichtig zu wissen, wie dein Körper funktioniert.</p><a href="{{ route('anatomy') }}">Mehr
+                        erfahren&nbsp;<svg
                                 xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
                                 viewBox="0 0 16 16" class="bi bi-arrow-right">
                             <path fill-rule="evenodd"

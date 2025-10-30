@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Exercise;
 use App\Models\ExerciseCategory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ExerciseController extends Controller
@@ -27,29 +28,23 @@ class ExerciseController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:1000',
-            'weight'  => 'nullable|numeric',
-            'repetitions'  => 'nullable|integer',
-            'sets'  => 'nullable|integer',
             'place'  => 'nullable|string|max:255',
             'category_id' => 'required|exists:exercise_categories,id',
         ]);
 
         Exercise::create([
-            'exercise_name' => $request->name,
+            'name' => $request->name,
             'description' => $request->description,
-            'weight'  => $request->weight,
-            'repetitions'  => $request->repetitions,
-            'sets'  => $request->sets,
             'place'  => $request->place,
             'exercise_category_id' => $request->category_id,
         ]);
 
-        return redirect()->route('uebungen.index')->with('success', 'Übung erfolgreich erstellt!');
+        return redirect()->route('exercises.index')->with('success', 'Übung erfolgreich erstellt!');
     }
 
     /**
@@ -65,15 +60,29 @@ class ExerciseController extends Controller
      */
     public function edit(Exercise $exercise)
     {
-        //
+        return view('exercises.edit', compact('exercise'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Exercise $exercise)
+    public function update(Request $request, Exercise $exercise):  RedirectResponse
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255,',
+            'description' => 'nullable|string|max:1000',
+            'place'  => 'nullable|string|max:255',
+            'category_id' => 'required|exists:exercise_categories,id',
+        ]);
+
+        $exercise->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'place'  => $request->place,
+            'exercise_category_id' => $request->category_id,
+        ]);
+
+        return redirect()->route('exercises.index')->with('success', 'übung erfolgreich aktualisiert!');
     }
 
     /**
@@ -81,6 +90,7 @@ class ExerciseController extends Controller
      */
     public function destroy(Exercise $exercise)
     {
-        //
+        $exercise->forceDelete();
+        return redirect()->route('exercises.index')->with('success', 'übung erfolgreich gelöscht!');
     }
 }

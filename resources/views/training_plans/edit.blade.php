@@ -14,28 +14,33 @@
     <link rel="stylesheet" href="/assets/css/Navbar-Right-Links-Dark-icons.css">
     <link rel="stylesheet" href="/assets/css/Projects-Grid-Horizontal-images.css">
     <link rel="stylesheet" href="/assets/css/Video-Parallax-Background-v2-multiple-parallax.css">
-    <style>
-        form div {
-            margin-top: 15px;
-        }
-    </style>
+    {{-- jQuery --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- Select2 --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        const exerciseCategories = @json($exerciseCategories, JSON_THROW_ON_ERROR);
+        const existingExercises = @json($plan->exercises, JSON_THROW_ON_ERROR);
+    </script>
 </head>
-
 <body>
 <x-header></x-header>
-<header>
-    <h1 style="padding: 15px;text-align: center;">Trainingsplan bearbeiten</h1>
+<header class="bg-primary text-white text-center py-4 mb-4 shadow-sm">
+    <h1 class="mb-0">Trainingsplan bearbeiten</h1>
 </header>
-<main style="padding: 70px;">
-    <form style="max-width: 600px;" action="{{ route('trainingsplan.update', $plan->id) }}" method="POST">
+<main class="container d-flex justify-content-center align-items-start" style="min-height: 80vh;">
+    <form  class="w-100 p-4 bg-white rounded shadow-sm" style="max-width: 750px;"
+           action="{{ route('training-plans.update', $plan->id) }}" method="POST">
         @csrf
         @method('PUT')
 
         <div class="mb-3">
             <label class="form-label" for="plan_name">Name</label>
-            <input class="form-control" type="text" id="plan_name" name="plan_name" value="{{$plan->plan_name}}" required />
+            <input class="form-control" type="text" id="plan_name" name="plan_name" value="{{$plan->name}}" required  autofocus/>
             @error('plan_name')
-            <div class="text-danger">{{ $message }}</div>
+            <div class="text-danger small">{{ $message }}</div>
             @enderror
         </div>
 
@@ -43,41 +48,43 @@
             <label class="form-label" for="duration">Dauer in Minuten</label>
             <input class="form-control" type="text" id="duration" name="duration" value="{{$plan->duration}}" />
             @error('duration')
-            <div class="text-danger">{{ $message }}</div>
+            <div class="text-danger small">{{ $message }}</div>
             @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-label" for="notes">Beschreibung</label>
-            <input class="form-control" type="text" id="notes" name="notes" value="{{$plan->notes}}" />
+            <textarea class="form-control" id="notes" name="notes" rows="2">
+                {{ old('notes', $plan->notes ?? '') }}
+            </textarea>
             @error('notes')
-            <div class="text-danger">{{ $message }}</div>
+            <div class="text-danger small">{{ $message }}</div>
             @enderror
         </div>
 
-        <div class="mb-3">
-            <label class="form-label" for="exercises">Übungen auswählen</label>
-            <select class="form-select" id="exercises" name="exercises[]" multiple>
-                @foreach($exercises as $exercise)
-                    <option value="{{ $exercise->id }}"
-                            {{ $plan->exercises->contains($exercise->id) ? 'selected' : '' }}>
-                        {{ $exercise->exercise_name }}
-                    </option>
-                @endforeach
-            </select>
-            @error('exercises[]')
-            <div class="text-danger">{{ $message }}</div>
-            @enderror
+        <h2 class="h4 mt-4 mb-3 border-bottom pb-2">Übungen</h2>
+
+
+        <div id="exercise-container" class="mb-4">
+
         </div>
 
+        <div class="d-flex justify-content-between align-items-center">
+            <button id="add-exercise-btn" type="button" class="btn btn-outline-success">
+                <i class="bi bi-plus-circle"></i> Übung hinzufügen
+            </button>
+            <button type="submit" class="btn btn-primary">Plan speichern</button>
+        </div>
 
-        <button type="submit" class="btn btn-primary mt-3">Plan speichern</button>
+        <div class="mt-3">
+            <a href="{{ route('training-plans.index') }}" class="btn btn-secondary w-100">Zurück</a>
+        </div>
     </form>
-    <a href="{{ route('trainingsplan.index') }}" class="btn btn-secondary mt-3">Zurück</a>
 </main>
 
 <x-footer></x-footer>
 
+<script src="/assets/js/script.js"></script>
 <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="/assets/js/bs-init.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>

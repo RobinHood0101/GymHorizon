@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('day');
             $table->string('notes')->nullable();
-            $table->foreignId('plan_id')->constrained('plans')->onDelete('cascade');
+            $table->foreignId('training_plan_id')->nullable()->constrained('training_plans')->onDelete('cascade');
             $table->foreignId('week_plan_id')->constrained('week_plans')->onDelete('cascade');
             $table->timestamps();
         });

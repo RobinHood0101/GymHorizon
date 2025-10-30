@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\Plan;
+use App\Models\TrainingPlan;
 use App\Models\User;
 class PlanPolicy
 {
@@ -17,7 +17,7 @@ class PlanPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Plan $plan): bool
+    public function view(User $user, TrainingPlan $plan): bool
     {
         return false;
     }
@@ -33,7 +33,7 @@ class PlanPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Plan $plan): bool
+    public function update(User $user, TrainingPlan $plan): bool
     {
         return $user->id === $plan->user_id;
     }
@@ -42,7 +42,7 @@ class PlanPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Plan $plan): bool
+    public function delete(User $user, TrainingPlan $plan): bool
     {
         return $user->id === $plan->user_id;
     }
@@ -51,7 +51,7 @@ class PlanPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Plan $plan): bool
+    public function restore(User $user, TrainingPlan $plan): bool
     {
         return false;
     }
@@ -59,7 +59,7 @@ class PlanPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Plan $plan): bool
+    public function forceDelete(User $user, TrainingPlan $plan): bool
     {
         return false;
     }

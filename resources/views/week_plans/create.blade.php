@@ -1,5 +1,5 @@
-@php use App\Models\Plan; @endphp
-<!DOCTYPE html>
+@php use App\Models\TrainingPlan; @endphp
+        <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
 <head>
@@ -23,11 +23,11 @@
     <h1 style="padding: 15px;text-align: center;">Wochenplan erstellen</h1>
 </header>
 <main style="padding: 70px;">
-    <form action="{{ route('wochenplan.store') }}" method="POST">
+    <form action="{{ route('week-plans.store') }}" method="POST">
         @csrf
 
         <label class="form-label" for="title">Titel</label>
-        <input class="form-control" type="text" name="title" id="title"/>
+        <input class="form-control" type="text" name="title" id="title" required autofocus/>
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -40,24 +40,30 @@
                 <tbody>
                 @php
                     $days = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
-                    $trainingPlans = Plan::all();
+                    $trainingPlans = auth()->user()->trainingPlans;
                 @endphp
                 @foreach($days as $index => $day)
                     <tr>
                         <td>{{ $day }}</td>
                         <td>
-                            <select class="form-select" name="days[{{ $index }}][plan_id]">
+                            <select class="form-select" name="days[{{ $index }}][training_plan_id]">
                                 <optgroup label="Wähle einen Trainingsplan">
-                                    <option value="Rest" selected>Rest Day</option>
+                                    <option value="rest" selected>Rest Day</option>
                                     @foreach($trainingPlans as $trainingPlan)
-                                        <option value="{{$trainingPlan->id}}">{{ $trainingPlan->plan_name }}</option>
+                                        <option value="{{$trainingPlan->id}}">{{ $trainingPlan->name }}</option>
                                     @endforeach
                                 </optgroup>
                             </select>
+                            @error('days.$index.training_plan_id')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </td>
                         <td>
                             <input class="form-control" type="text" name="days[{{ $index }}][notes]">
                             <input type="hidden" name="days[{{ $index }}][day]" value="{{ $day }}">
+                            @error('days.$index.notes')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </td>
                     </tr>
                 @endforeach
@@ -65,11 +71,11 @@
             </table>
         </div>
         <input class="btn btn-primary" type="submit" value="Erstellen"/>
-        @error('plan_name')
+        @error('title')
         <div class="text-danger">{{ $message }}</div>
         @enderror
     </form>
-    <a href="{{ route('wochenplan.index') }}" class="btn btn-secondary mt-3">Zurück</a>
+    <a href="{{ route('week-plans.index') }}" class="btn btn-secondary mt-3">Zurück</a>
 </main>
 
 <x-footer></x-footer>

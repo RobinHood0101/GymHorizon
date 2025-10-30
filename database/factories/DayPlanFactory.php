@@ -6,7 +6,7 @@ use App\Models\WeekPlan;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\DayPlan;
-use App\Models\Plan;
+use App\Models\TrainingPlan;
 
 class DayPlanFactory extends Factory
 {
@@ -25,7 +25,7 @@ class DayPlanFactory extends Factory
         return [
             'day' => fake()->date(),
             'notes' => fake()->text(),
-            'plan_id' => Plan::factory(),
+            'training_plan_id' => TrainingPlan::factory(),
             'week_plan_id' => WeekPlan::factory(),
         ];
     }

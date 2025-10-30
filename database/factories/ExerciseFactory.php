@@ -22,7 +22,7 @@ class ExerciseFactory extends Factory
     public function definition(): array
     {
         return [
-            'exercise_name' => fake()->word(),
+            'name' => fake()->word(),
             'description' => fake()->text(),
             'place' => fake()->word(),
             'exercise_category_id' => ExerciseCategory::factory(),

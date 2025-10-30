@@ -17,7 +17,7 @@ class Exercise extends Model
      * @var array
      */
     protected $fillable = [
-        'exercise_name',
+        'name',
         'description',
         'place',
         'exercise_category_id',
@@ -36,9 +36,9 @@ class Exercise extends Model
         ];
     }
 
-    public function plans(): BelongsToMany
+    public function trainingPlans(): BelongsToMany
     {
-        return $this->belongsToMany(Plan::class)
+        return $this->belongsToMany(TrainingPlan::class)
             ->withPivot(['weight', 'repetitions', 'sets'])
             ->withTimestamps();
     }

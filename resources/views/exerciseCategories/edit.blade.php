@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Übungskategorie erstellen | Gymhorizon</title>
+    <title>Übungskategorie bearbeiten | Gymhorizon</title>
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/Advanced-NavBar---Multi-dropdown.css">
     <link rel="stylesheet" href="/assets/css/Bootstrap-DataTables.css">
@@ -15,11 +15,11 @@
     <link rel="stylesheet" href="/assets/css/Video-Parallax-Background-v2-multiple-parallax.css">
     <style>
         main {
-            padding: 30px 15px 50px 15px;
+            padding: 50px 15px;
         }
         .form-container {
             max-width: 600px;
-            margin: 50px auto 0 auto;
+            margin: auto;
             background: #ffffff;
             padding: 30px;
             border-radius: 10px;
@@ -31,7 +31,6 @@
         }
         header h1 {
             font-size: 2rem;
-            text-align: center;
             margin-top: 30px;
         }
     </style>
@@ -40,26 +39,27 @@
 <body>
 <x-header></x-header>
 
-<header>
-    <h1>Übungskategorie erstellen</h1>
+<header class="text-center">
+    <h1>Übungskategorie bearbeiten</h1>
 </header>
 
 <main>
     <div class="form-container">
-        <form action="{{ route('exercise-categories.store') }}" method="POST">
+        <form action="{{ route('exercise-categories.update', $exerciseCategory->id) }}" method="POST">
             @csrf
+            @method('PUT')
 
             <div class="mb-3">
                 <label class="form-label" for="name">Name der Kategorie</label>
-                <input class="form-control" type="text" name="name" id="name" value="{{ old('name') }}" autofocus>
+                <input class="form-control" type="text" name="name" id="name" value="{{ old('name', $exerciseCategory->name) }}" autofocus>
                 @error('name')
                 <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="btn-group mt-3">
-                <button type="submit" class="btn btn-primary">Erstellen</button>
-                <a href="{{ route('exercises.index') }}" class="btn btn-secondary">Zurück</a>
+                <button type="submit" class="btn btn-primary">Speichern</button>
+                <a href="{{ route('uebungen.index') }}" class="btn btn-secondary">Zurück</a>
             </div>
         </form>
     </div>

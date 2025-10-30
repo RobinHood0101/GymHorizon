@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\DayPlan;
 use App\Models\Exercise;
 use App\Models\ExerciseCategory;
-use App\Models\Plan;
+use App\Models\TrainingPlan;
 use App\Models\User;
 use App\Models\WeekPlan;
 use Illuminate\Database\Seeder;
@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
                 'super' => true,
             ]);
         }
-        Plan::factory(5)->create();
+        TrainingPlan::factory(5)->create();
         DayPlan::factory(5)->create();
         WeekPlan::factory(5)->create();
         Exercise::factory(5)->create();

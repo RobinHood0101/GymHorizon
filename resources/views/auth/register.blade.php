@@ -34,8 +34,8 @@
                                 </svg></div>
                             <form class="text-center" action="{{ route('register') }}" method="post">
                                 @csrf
-                                <div class="mb-3"><input class="form-control" type="text" name="name" placeholder="Name"></div>
-                                <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="Email"></div>
+                                <div class="mb-3"><input class="form-control" type="text" name="name" placeholder="Name" value="{{ old('name') }}" autofocus></div>
+                                <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="Email" value=" {{ old('email') }}"></div>
                                 <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Passwort"></div>
                                 <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Registrieren</button></div>
                             </form>

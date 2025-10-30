@@ -21,7 +21,7 @@ class ExerciseCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'category_name' => fake()->word(),
+            'name' => fake()->word(),
         ];
     }
 }

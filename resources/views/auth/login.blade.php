@@ -34,7 +34,7 @@
                                 </svg></div>
                             <form class="text-center" action="{{ route('login') }}" method="post">
                                 @csrf
-                                <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="Email"></div>
+                                <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="Email" value=" {{ old('email') }}" autofocus></div>
                                 <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Passwort"></div>
                                 <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Login</button></div>
                                 <p class="text-muted"><a href="{{ route('password.email') }}">Passwort vergessen?</a></p>
