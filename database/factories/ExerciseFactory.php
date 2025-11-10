@@ -26,6 +26,7 @@ class ExerciseFactory extends Factory
             'description' => fake()->text(),
             'place' => fake()->word(),
             'exercise_category_id' => ExerciseCategory::factory(),
+            'user_id' => 1,
         ];
     }
 }

@@ -55,4 +55,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(WeekPlan::class);
     }
+
+    public function exercises(): HasMany
+    {
+        return $this->hasMany(Exercise::class);
+    }
+
+    public function exerciseCategories(): HasMany
+    {
+        return $this->hasMany(ExerciseCategory::class);
+    }
 }

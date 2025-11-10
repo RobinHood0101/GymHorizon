@@ -21,6 +21,7 @@ class Exercise extends Model
         'description',
         'place',
         'exercise_category_id',
+        'user_id',
     ];
 
     /**
@@ -46,5 +47,10 @@ class Exercise extends Model
     public function exerciseCategory(): BelongsTo
     {
         return $this->belongsTo(ExerciseCategory::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

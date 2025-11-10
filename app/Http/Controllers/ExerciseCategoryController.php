@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ExerciseCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ExerciseCategoryController extends Controller
 {
@@ -34,6 +35,7 @@ class ExerciseCategoryController extends Controller
 
         ExerciseCategory::create([
             'name' => $request->name,
+            'user_id' => Auth::id(),
         ]);
 
         return redirect()->route('exercises.index')->with('success', 'Übungskategorie erfolgreich erstellt!');
