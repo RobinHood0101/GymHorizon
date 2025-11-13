@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Exercise;
+use App\Http\Requests\TrainingPlan\DestroyTrainingPlanRequest;
+use App\Http\Requests\TrainingPlan\EditTrainingPlanRequest;
+use App\Http\Requests\TrainingPlan\StoreTrainingPlanRequest;
+use App\Http\Requests\TrainingPlan\UpdateTrainingPlanRequest;
 use App\Models\ExerciseCategory;
 use App\Models\TrainingPlan;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
 class TrainingPlanController extends Controller
@@ -26,6 +29,9 @@ class TrainingPlanController extends Controller
      */
     public function create()
     {
+        if (Auth::user()->cannot('create', TrainingPlan::class)) {
+            abort(403);
+        }
         $exerciseCategories = ExerciseCategory::all()->load('exercises');
         return view('training_plans.create', compact('exerciseCategories'));
     }
@@ -33,30 +39,13 @@ class TrainingPlanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreTrainingPlanRequest $request): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'duration' => 'required|numeric|max:2000',
-            'notes' => 'nullable|string',
-
-            'exercises' => 'nullable|array',
-            'exercises.*' => 'exists:exercises,id',
-
-            'weights' => 'nullable|array',
-            'weights.*' => 'nullable|numeric|min:0',
-
-            'reps' => 'nullable|array',
-            'reps.*' => 'nullable|integer|min:0',
-
-            'sets' => 'nullable|array',
-            'sets.*' => 'nullable|integer|min:0',
-        ]);
-
         $plan = Auth::user()->trainingPlans()->create([
             'name' => $request->name,
             'duration' => $request->duration,
             'notes' => $request->notes,
+            'user_id' => Auth::id(),
         ]);
 
         // save pivot data
@@ -88,54 +77,47 @@ class TrainingPlanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(EditTrainingPlanRequest $request, TrainingPlan $training_plan)
     {
         $exerciseCategories = ExerciseCategory::all()->load('exercises');
-        $plan = Auth::user()->trainingPlans()->with(['exercises'])->findOrFail($id);
+        $plan = $training_plan->load('exercises');
         return view('training_plans.edit', compact('plan'), ['exerciseCategories' => $exerciseCategories]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, TrainingPlan $trainingPlan)
+    public function update(UpdateTrainingPlanRequest $request, TrainingPlan $trainingPlan): RedirectResponse
     {
-        // Policy geht nicht
-        if ($request->user()->cannot('update', $trainingPlan)) {
-            abort(403);
-        }
-
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'duration' => 'required|numeric|max:2000',
-            'notes' => 'nullable|string',
-            'exercises' => 'nullable|array',
-            'exercises.*' => 'exists:exercises,id',
-        ]);
-
         $trainingPlan->update([
             'name' => $request->get('name'),
             'duration' => $request->get('duration'),
             'notes' => $request->get('notes'),
+            'user_id' => Auth::id(),
         ]);
 
+        // save pivot data
         if ($request->has('exercises')) {
-            $trainingPlan->exercises()->sync($request->exercises);
-        }
+            $pivotData = [];
 
+            foreach ($request->exercises as $i => $exerciseId) {
+                $pivotData[$exerciseId] = [
+                    'weight' => $request->weights[$i] ?? null,
+                    'repetitions' => $request->reps[$i] ?? null,
+                    'sets' => $request->sets[$i] ?? null,
+                ];
+            }
+
+            $trainingPlan->exercises()->sync($pivotData);
+        }
         return redirect()->route('training-plans.index')->with('success', 'TrainingPlan erfolgreich bearbeitet!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, TrainingPlan $trainingPlan)
+    public function destroy(DestroyTrainingPlanRequest $request, TrainingPlan $trainingPlan): RedirectResponse
     {
-        // Wichtig: {plan} muss identisch heißen wie der Parameter im Controller (TrainingPlan $plan). pa route:list
-        if ($request->user()->cannot('delete', $trainingPlan)) {
-            abort(403);
-        }
-
         $trainingPlan->exercises()->detach();
         $trainingPlan->forceDelete();
 

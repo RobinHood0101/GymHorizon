@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ExerciseCategory\DestroyExerciseCategoryRequest;
+use App\Http\Requests\ExerciseCategory\EditExerciseCategoryRequest;
+use App\Http\Requests\ExerciseCategory\StoreExerciseCategoryRequest;
+use App\Http\Requests\ExerciseCategory\UpdateExerciseCategoryRequest;
 use App\Models\ExerciseCategory;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ExerciseCategoryController extends Controller
@@ -27,12 +30,8 @@ class ExerciseCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreExerciseCategoryRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255|unique:exercise_categories,name',
-        ]);
-
         ExerciseCategory::create([
             'name' => $request->name,
             'user_id' => Auth::id(),
@@ -52,7 +51,7 @@ class ExerciseCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ExerciseCategory $exerciseCategory)
+    public function edit(EditExerciseCategoryRequest $request, ExerciseCategory $exerciseCategory)
     {
         return view('exerciseCategories.edit', compact('exerciseCategory'));
     }
@@ -60,12 +59,8 @@ class ExerciseCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ExerciseCategory $exerciseCategory)
+    public function update(UpdateExerciseCategoryRequest $request, ExerciseCategory $exerciseCategory)
     {
-        $request->validate([
-            'name' => 'required|string|max:255|unique:exercise_categories,name,' . $exerciseCategory->id,
-        ]);
-
         $exerciseCategory->update([
             'name' => $request->name,
         ]);
@@ -76,7 +71,7 @@ class ExerciseCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ExerciseCategory $exerciseCategory)
+    public function destroy(DestroyExerciseCategoryRequest $request, ExerciseCategory $exerciseCategory)
     {
         $exerciseCategory->forceDelete();
 

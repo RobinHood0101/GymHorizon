@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\WeekPlan\DestroyWeekPlanRequest;
+use App\Http\Requests\WeekPlan\StoreWeekPlanRequest;
+use App\Http\Requests\WeekPlan\UpdateWeekPlanRequest;
 use App\Models\DayPlan;
 use App\Models\WeekPlan;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class WeekPlanController extends Controller
@@ -15,7 +17,7 @@ class WeekPlanController extends Controller
      */
     public function index()
     {
-        $weekPlans = Auth::user()->weekPlans()->get();
+        $weekPlans = Auth::user()->weekPlans()->with('dayPlans')->get();
         return view('week_plans.index', compact('weekPlans'));
     }
 
@@ -24,23 +26,17 @@ class WeekPlanController extends Controller
      */
     public function create()
     {
+        if (Auth::user()->cannot('create', WeekPlan::class)) {
+            abort(403);
+        }
         return view('week_plans.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(StoreWeekPlanRequest $request): RedirectResponse
     {
-        $request->validate([
-            'days' => 'required|array',
-            'title' => 'required|string',
-
-            'days.*.day' => 'required|string|max:50',
-            'days.*.training_plan_id' => 'nullable',
-            'days.*.notes' => 'nullable|string|max:1000',
-        ]);
-
         $weekPlan = WeekPlan::create([
             'user_id' => auth()->id(),
             'title'    => $request->title,
@@ -70,23 +66,17 @@ class WeekPlanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(WeekPlan $weekPlan)
     {
-        $weekPlan = Auth::user()->weekPlans()->with(['dayPlans'])->findOrFail($id);
+        $weekPlan->load('dayPlans');
         return view('week_plans.edit', compact('weekPlan'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id): RedirectResponse
+    public function update(UpdateWeekPlanRequest $request, WeekPlan $weekPlan): RedirectResponse
     {
-        $request->validate([
-            'days' => 'required|array',
-            'title' => 'required|string',
-        ]);
-
-        $weekPlan = Auth::user()->weekPlans()->findOrFail($id);
         $weekPlan->update([
             'title'    => $request->title,
         ]);
@@ -124,12 +114,8 @@ class WeekPlanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, WeekPlan $weekPlan): RedirectResponse
+    public function destroy(DestroyWeekPlanRequest $request, WeekPlan $weekPlan): RedirectResponse
     {
-        // Policy geht nicht
-//        if ($request->user()->cannot('delete', $weekPlan)) {
-//            abort(403);
-//        }
         $weekPlan->dayPlans()->forceDelete();
         $weekPlan->forceDelete();
 

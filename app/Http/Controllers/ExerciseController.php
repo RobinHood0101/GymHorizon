@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\DestroyExerciseRequest;
-use App\Http\Requests\StoreExerciseRequest;
-use App\Http\Requests\UpdateExerciseRequest;
+use App\Http\Requests\Exercise\DestroyExerciseRequest;
+use App\Http\Requests\Exercise\EditExerciseRequest;
+use App\Http\Requests\Exercise\StoreExerciseRequest;
+use App\Http\Requests\Exercise\UpdateExerciseRequest;
 use App\Models\Exercise;
 use App\Models\ExerciseCategory;
 use Illuminate\Http\RedirectResponse;
@@ -36,6 +37,9 @@ class ExerciseController extends Controller
      */
     public function create(Request $request)
     {
+        if (Auth::user()->cannot('create', Exercise::class)) {
+           abort(403);
+        }
         return view('exercises.create', ['category' => ExerciseCategory::findOrFail($request->get('category'))]);
     }
 
@@ -66,8 +70,9 @@ class ExerciseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Exercise $exercise)
+    public function edit(EditExerciseRequest $request, Exercise $exercise)
     {
+
         return view('exercises.edit', compact('exercise'));
     }
 
@@ -92,6 +97,7 @@ class ExerciseController extends Controller
     public function destroy(DestroyExerciseRequest $request, Exercise $exercise): RedirectResponse
     {
         $exercise->forceDelete();
+
         return redirect()->route('exercises.index')->with('success', 'übung erfolgreich gelöscht!');
     }
 }
