@@ -14,15 +14,17 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.16",
         "fakerphp/faker": "^1.23",
+        "larastan/larastan": "^3.0",
         "laravel-shift/blueprint": "^2.12",
-        "laravel/boost": "^1.3",
         "laravel/breeze": "^2.3",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.0",
-        "pestphp/pest": "^3.8",
-        "pestphp/pest-plugin-laravel": "^3.2"
+        "pestphp/pest": "*",
+        "pestphp/pest-plugin-browser": "*",
+        "pestphp/pest-plugin-laravel": "*",
+        "phpstan/phpstan": "*"
     },
     "autoload": {
         "psr-4": {

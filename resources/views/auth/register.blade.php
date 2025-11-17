@@ -48,6 +48,7 @@
                                     </ul>
                                 </div>
                             @endif
+                            <a href="{{ route('login') }}">Bereits ein Konto?</a>
                         </div>
                     </div>
                 </div>

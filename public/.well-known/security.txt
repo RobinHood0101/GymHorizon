@@ -1,0 +1,9 @@
+Contact: mailto:securitytxtse@protonmail.com
+Expires: 2026-11-05T13:45
+Encryption: https://example.com/pgp-key.txt
+Acknowledgments: https://example.com/hall-of-fame
+Policy: https://example.com/security-policy
+Hiring: https://example.com/jobs
+CSAF: https://example.com/.well-known/csaf/provider-metadata.json
+Preferred-Languages: en, sv
+Canonical: https://example.com/.well-known/security.txt

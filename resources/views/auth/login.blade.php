@@ -48,6 +48,7 @@
                                     </ul>
                                 </div>
                             @endif
+                            <a href="{{ route('register') }}">Noch kein Konto?</a>
                         </div>
                     </div>
                 </div>

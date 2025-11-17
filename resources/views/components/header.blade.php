@@ -21,7 +21,7 @@
                 <li class="nav-item"><a class="nav-link {{ setActive('training-plans*') ? 'text-white' : ''}}" href="{{ route('training-plans.index') }}" style="color: var(--bs-navbar-color);">Trainingsplan</a></li>
             </ul>
             @guest
-                <a class="btn btn-primary ms-md-2" role="button" href="{{ route('register') }}">Registrieren</a><a class="btn btn-primary ms-md-2" role="button" href="{{ route('login') }}">Einloggen</a>
+                <a class="btn btn-primary ms-md-2 me-2" role="button" href="{{ route('register') }}">Registrieren</a><a class="btn btn-primary ms-md-2" role="button" href="{{ route('login') }}">Einloggen</a>
             @endguest
             @auth
                 <form method="POST" action="{{ route('logout') }}">

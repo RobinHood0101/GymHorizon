@@ -1,14 +1,19 @@
-{{ collection:anatomy }}
-<section style="min-width: 800px;padding: 50px;">
-    <h2>{{ title }}</h2>
-    {{ if image }}
-    {{ image }}
-    <figure class="figure"><img class="rounded figure-img shadow" data-bs-toggle="tooltip" data-bss-tooltip=""
-                                src="{{ url }}" style="height: auto;width: 100%;display: block;"
-                                title="Muskelgruppen" alt="image">
-        <figcaption class="figure-caption">{{ content }}</figcaption>
-    </figure>
-    {{ /image }}
-    {{ /if }}
-</section>
-{{ /collection:anatomy }}
+<div class="container py-4 py-xl-5">
+    <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
+        {{ collection:anatomy }}
+        <div class="col">
+            <div>
+                {{ if image }}
+                {{ image }}
+                <img class="rounded img-fluid object-fit-cover d-block w-100" style="height: 200px;" src="{{ url }}" />
+                {{ /image }}
+                {{ /if }}
+                <div class="py-4">
+                    <h4>{{ title }}</h4>
+                    <p>{{ content }}</p>
+                </div>
+            </div>
+        </div>
+        {{ /collection:anatomy }}
+    </div>
+</div>
