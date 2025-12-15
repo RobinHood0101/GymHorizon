@@ -20,6 +20,9 @@ Route::get('/ernaehrung', function () {
 Route::get('/tipps', function () {
     return view('tips');
 })->name('tips');
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('exercises', ExerciseController::class);

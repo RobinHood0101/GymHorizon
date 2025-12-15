@@ -3,11 +3,9 @@
         {{ collection:anatomy }}
         <div class="col">
             <div>
-                {{ if image }}
                 {{ image }}
-                <img class="rounded img-fluid object-fit-cover d-block w-100" style="height: 200px;" src="{{ url }}" />
+                <img class="rounded img-fluid object-fit-cover d-block w-100" style="height: 200px;" src="{{ url }}"  alt="img"/>
                 {{ /image }}
-                {{ /if }}
                 <div class="py-4">
                     <h4>{{ title }}</h4>
                     <p>{{ content }}</p>

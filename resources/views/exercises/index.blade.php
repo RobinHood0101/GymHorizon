@@ -3,7 +3,12 @@
 @section('title', 'Übungen | Gymhorizon')
 
 @push('styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
+        main {
+            padding: 2rem 1rem;
+        }
+
         .category-card {
             margin-bottom: 2rem;
         }
