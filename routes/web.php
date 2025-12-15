@@ -4,12 +4,14 @@ use App\Http\Controllers\ExerciseCategoryController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\TrainingPlanController;
 use App\Http\Controllers\WeekPlanController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/auth.php';
 
-Route::get('/', function () {
-    return view('home');
+Route::get('/', function (Request $request) {
+    $first_login = $request->boolean('first_login', false);
+    return view('home', ['first_login' => $first_login]);
 })->name('home');
 Route::get('/anatomie', function () {
     return view('anatomy');

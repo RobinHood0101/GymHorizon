@@ -7,4 +7,7 @@
             </ul>
             <p class="mb-0" style="color: var(--bs-border-color);">© 2024 - {{ now()->year }} GymHorizon</p>
         </div>
+{{--
+    <p><a href="{{ route('home', ['first_login' => true]) }}">Quick Start Guide</a></p>
+--}}
     </footer>

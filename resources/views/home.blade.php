@@ -3,8 +3,8 @@
 @section('title', 'GymHorizon')
 
 @section('hero')
-    @if(isset($first_login))
-        <x-guide></x-guide>
+    @if($first_login ?? false)
+            <x-guide></x-guide>
     @endif
     <section>
         <div data-bss-parallax-bg="true" style="height: 600px;background: url('{{ asset('assets/img/gym.jpg') }}');">
