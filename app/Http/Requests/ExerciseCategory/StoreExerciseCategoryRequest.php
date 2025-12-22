@@ -4,6 +4,7 @@ namespace App\Http\Requests\ExerciseCategory;
 
 use App\Models\ExerciseCategory;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreExerciseCategoryRequest extends FormRequest
 {
@@ -22,8 +23,16 @@ class StoreExerciseCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
+        $userId = $this->user()->id;
+
         return [
-            'name' => 'required|string|max:255|unique:exercise_categories,name',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('exercise_categories', 'name')
+                    ->where('user_id', $userId)
+            ],
         ];
     }
 }

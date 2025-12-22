@@ -22,12 +22,17 @@ class UpdateExerciseCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        $exerciseCategory = $this->route('exerciseCategory');
+        $exerciseCategory = $this->route('exercise_category');
+        $userId = $this->user()->id;
 
         return [
             'name' => [
-                'required', 'string', 'max:255',
-                Rule::unique('exercise_categories', 'name')->ignore($exerciseCategory?->id)
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('exercise_categories', 'name')
+                    ->where('user_id', $userId)
+                    ->ignore($exerciseCategory?->id)
             ],
         ];
     }
