@@ -2,7 +2,6 @@ title: nutrition
 template: nutrition/show
 layout: layout
 revisions: false
-route: '/ernaehrung/{slug}'
 sort_dir: asc
 date_behavior:
   past: public

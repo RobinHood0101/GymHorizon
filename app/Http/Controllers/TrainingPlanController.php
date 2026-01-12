@@ -32,7 +32,9 @@ class TrainingPlanController extends Controller
         if (Auth::user()->cannot('create', TrainingPlan::class)) {
             abort(403);
         }
-        $exerciseCategories = ExerciseCategory::all()->load('exercises');
+        $exerciseCategories = ExerciseCategory::whereUserId(Auth::user()->id)
+            ->get()
+            ->load('exercises');
         return view('training_plans.create', compact('exerciseCategories'));
     }
 
@@ -79,7 +81,9 @@ class TrainingPlanController extends Controller
      */
     public function edit(EditTrainingPlanRequest $request, TrainingPlan $training_plan)
     {
-        $exerciseCategories = ExerciseCategory::all()->load('exercises');
+        $exerciseCategories = ExerciseCategory::whereUserId(Auth::user()->id)
+            ->get()
+            ->load('exercises');
         $plan = $training_plan->load('exercises');
         return view('training_plans.edit', compact('plan'), ['exerciseCategories' => $exerciseCategories]);
     }

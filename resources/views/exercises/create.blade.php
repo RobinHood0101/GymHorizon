@@ -23,7 +23,7 @@
 
         <input type="hidden" name="category_id" value="{{ $category->id }}"/>
 
-        <input class="btn btn-primary" type="submit" value="Erstellen"/>
+        <input class="btn btn-primary mt-3" type="submit" value="Erstellen"/>
         @if ($errors->any())
             <div class="mt-3 text-danger">
                 <ul>
