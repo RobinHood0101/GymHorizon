@@ -9,6 +9,7 @@
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
+        "livewire/livewire": "^3.7",
         "statamic/cms": "^5.64"
     },
     "require-dev": {

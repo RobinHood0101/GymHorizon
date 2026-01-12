@@ -23,6 +23,8 @@
 
     {{-- Site-specific scripts --}}
     @stack('scripts-head')
+
+    @livewireStyles
 </head>
 <body class="@yield('body_class')">
     <x-header />
@@ -49,5 +51,6 @@
 
     {{-- Site-specific scripts --}}
     @stack('scripts')
+    @livewireScripts
 </body>
 </html>
