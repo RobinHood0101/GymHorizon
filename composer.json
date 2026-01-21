@@ -9,8 +9,9 @@
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
-        "livewire/livewire": "^3.7",
-        "statamic/cms": "^5.64"
+        "livewire/livewire": "^4.0",
+        "statamic/cms": "^5.64",
+        "statamic/eloquent-driver": "^4.35"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.16",
@@ -20,6 +21,7 @@
         "laravel/breeze": "^2.3",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",
+        "laravel/telescope": "^5.16",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.0",
         "pestphp/pest": "*",
@@ -65,7 +67,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "laravel/telescope"
+            ]
         }
     },
     "config": {
