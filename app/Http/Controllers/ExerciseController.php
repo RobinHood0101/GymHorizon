@@ -8,12 +8,15 @@ use App\Http\Requests\Exercise\StoreExerciseRequest;
 use App\Http\Requests\Exercise\UpdateExerciseRequest;
 use App\Models\Exercise;
 use App\Models\ExerciseCategory;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ExerciseController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
@@ -37,9 +40,12 @@ class ExerciseController extends Controller
      */
     public function create(Request $request)
     {
+        // TODO: doesnt work, fix auth, every user can create exercises for other users
         if (Auth::user()->cannot('create', Exercise::class)) {
            abort(403);
         }
+
+//        $this->authorize('view',  Exercise::class);
         return view('exercises.create', ['category' => ExerciseCategory::findOrFail($request->get('category'))]);
     }
 

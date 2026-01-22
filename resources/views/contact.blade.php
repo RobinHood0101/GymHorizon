@@ -38,9 +38,9 @@
                     <div class="col-md-6 col-lg-5 col-xl-4">
                         <div>
                             <form class="p-3 p-xl-4" method="post">
-                                <div class="mb-3"><input id="name-1" class="form-control" type="text" name="name" placeholder="Name" /></div>
-                                <div class="mb-3"><input id="email-1" class="form-control" type="email" name="email" placeholder="Email" /></div>
-                                <div class="mb-3"><textarea id="message-1" class="form-control" name="comment" rows="6" placeholder="Message"></textarea></div>
+                                <div class="mb-3"><input id="name-1" class="form-control" type="text" name="name" placeholder="Name" required /></div>
+                                <div class="mb-3"><input id="email-1" class="form-control" type="email" name="email" placeholder="Email" required /></div>
+                                <div class="mb-3"><textarea id="message-1" class="form-control" name="comment" rows="6" placeholder="Message" required ></textarea></div>
                                 <input type="hidden" class="hidden" name="{{ isset($honeypot) ? $honeypot : 'honeypot' }}" />
                                 <div><button class="btn btn-primary w-100 d-block" type="submit">Send </button></div>
                             </form>
