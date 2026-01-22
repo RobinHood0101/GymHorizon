@@ -56,7 +56,7 @@
                                 <div>
                                     <h5 class="card-title">Wochenplan</h5>
                                     <p class="card-text">Erstelle individuelle Wochenpläne.</p>
-                                    <a href="{{ route('nutrition') }}" class="btn btn-primary btn-sm">Mehr erfahren</a>
+                                    <a href="{{ route('week-plans.index') }}" class="btn btn-primary btn-sm">Mehr erfahren</a>
                                 </div>
                             </div>
                         </div>
