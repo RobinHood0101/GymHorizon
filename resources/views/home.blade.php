@@ -81,7 +81,7 @@
                         <i class="icon ion-android-restaurant"></i></div>
                     <div>
                         <h4>Ernährung</h4>
-                        <p><br>Finde heraus welche Ernährung dich zu deinen Zielen führt<br><br></p><a
+                        <p>Finde heraus welche Ernährung dich zu deinen Zielen führt</p><a
                                 href="{{ route('nutrition') }}">Mehr
                             erfahren&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
                                                fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-right">
