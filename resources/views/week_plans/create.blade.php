@@ -62,5 +62,5 @@
         <div class="text-danger">{{ $message }}</div>
         @enderror
     </form>
-    <a href="{{ route('week-plans.index') }}" class="btn btn-secondary mt-3">Zurück</a>
+    <a wire:navigate href="{{ route('week-plans.index') }}" class="btn btn-secondary mt-3">Zurück</a>
 @endsection

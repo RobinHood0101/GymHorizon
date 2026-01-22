@@ -28,7 +28,7 @@
         </div>
     @endif
     <div class="mb-4 text-center">
-        <a href="{{ route('week-plans.create') }}" class="btn btn-primary btn-lg">
+        <a wire:navigate href="{{ route('week-plans.create') }}" class="btn btn-primary btn-lg">
             Neuen Wochenplan erstellen
         </a>
     </div>
@@ -43,8 +43,8 @@
                 <div class="d-flex justify-content-between align-items-start mb-3">
                     <h2 class="card-title">{{ $weekplan->title }}</h2>
                     <div class="d-flex flex-column gap-2">
-                        <a href="{{ route('week-plans.edit', $weekplan->id) }}" class="btn btn-warning btn-sm">Bearbeiten</a>
-                        <form action="{{ route('week-plans.destroy', $weekplan->id) }}" method="POST" class="m-0">
+                        <a wire:navigate href="{{ route('week-plans.edit', $weekplan->id) }}" class="btn btn-warning btn-sm">Bearbeiten</a>
+                        <form action="{{ route('week-plans.destroy', $weekplan->id) }}" method="POST" onsubmit="return confirm('Dieser Wochenplan wirklich löschen?')" class="m-0">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Löschen</button>

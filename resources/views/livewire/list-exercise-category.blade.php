@@ -10,9 +10,39 @@
                 <div class="d-flex justify-content-between align-items-start mb-3">
                     <h2 class="card-title">{{ $exerciseCategory->name }}</h2>
                     <div class="d-flex flex-column gap-2">
-                        <a href="{{ route('exercise-categories.edit', $exerciseCategory->id) }}"
-                           class="btn btn-warning btn-sm">Bearbeiten</a>
-                        <button class="btn btn-danger btn-sm" wire:click="delete({{ $exerciseCategory->id }})">
+                        <button
+                                type="button"
+                                class="btn btn-warning btn-sm"
+                                data-bs-toggle="modal"
+                                data-bs-target="#updateModalCenter-{{ $exerciseCategory->id }}">
+                            Bearbeiten
+                        </button>
+                        <div class="modal fade" id="updateModalCenter-{{ $exerciseCategory->id }}" tabindex="-1"
+                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalCenterTitle">
+                                            Kategorie bearbeiten
+                                        </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <livewire:exercise-category-form
+                                                submitAction="update"
+                                                buttonText="Speichern"
+                                                :name="$exerciseCategory->name"
+                                                :id="$exerciseCategory->id"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button
+                                class="btn btn-danger btn-sm"
+                                wire:click="delete({{ $exerciseCategory->id }})"
+                                wire:confirm="Sind Sie sicher, dass Sie diese Kategorie löschen wollen?">
                             Löschen
                         </button>
                     </div>
@@ -31,14 +61,14 @@
                             </thead>
                             <tbody>
                             @foreach($exerciseCategory->exercises as $exercise)
-                                <tr>
+                                <tr wire:key="exercise-{{ $exercise->id }}">
                                     <td>{{ $exercise->name }}</td>
                                     <td>{{ $exercise->description }}</td>
                                     <td>{{ $exercise->place }}</td>
                                     <td class="text-center" style="width: 120px;">
                                         <div class="d-flex justify-content-center gap-2">
                                             <!-- edit -->
-                                            <a href="{{ route('exercises.edit', $exercise->id) }}" class="btn btn-sm btn-warning" title="Bearbeiten">
+                                            <a wire:navigate href="{{ route('exercises.edit', $exercise->id) }}" class="btn btn-sm btn-warning" title="Bearbeiten">
                                                 <i class="bi bi-pencil"></i>
                                             </a>
 
@@ -59,7 +89,7 @@
                     </div>
                 @endif
 
-                <a href="{{ route('exercises.create') }}?category={{ $exerciseCategory->id }}"
+                <a wire:navigate href="{{ route('exercises.create') }}?category={{ $exerciseCategory->id }}"
                    class="btn btn-primary mt-3">
                     Neue Übung zu {{ $exerciseCategory->name }} hinzufügen
                 </a>

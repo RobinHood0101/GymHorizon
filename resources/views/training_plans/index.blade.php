@@ -36,7 +36,7 @@
         </div>
     @endif
     <div class="mb-4 text-center">
-        <a href="{{ route('training-plans.create') }}" class="btn btn-primary btn-lg">
+        <a wire:navigate href="{{ route('training-plans.create') }}" class="btn btn-primary btn-lg">
             Neuen Trainingsplan erstellen
         </a>
     </div>
@@ -55,9 +55,9 @@
                         <p class="mb-0"><strong>Beschreibung:</strong> {{ $plan->notes }}</p>
                     </div>
                     <div class="d-flex flex-column gap-2">
-                        <a href="{{ route('training-plans.edit', $plan->id) }}"
+                        <a wire:navigate href="{{ route('training-plans.edit', $plan->id) }}"
                            class="btn btn-warning btn-sm">Bearbeiten</a>
-                        <form action="{{ route('training-plans.destroy', $plan->id) }}" method="POST" class="m-0">
+                        <form action="{{ route('training-plans.destroy', $plan->id) }}" method="POST" onsubmit="return confirm('Diesen Trainingsplan wirklich löschen?')" class="m-0">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Löschen</button>

@@ -8,15 +8,22 @@ use Livewire\Component;
 
 class ListExerciseCategory extends Component
 {
+    public string $name;
+
     #[On('exercise-category-created')]
+    #[On('exercise-category-updated')]
     public function refresh()
     {
         $this->dispatch('$refresh');
     }
-
+    
     public function delete(int $id)
     {
-        ExerciseCategory::findOrFail($id)->delete();
+        $exerciseCategory = ExerciseCategory::findOrFail($id);
+
+        $this->authorize('delete', $exerciseCategory);
+
+        $exerciseCategory->delete();
 
         $this->dispatch('$refresh');
     }
@@ -24,7 +31,7 @@ class ListExerciseCategory extends Component
     public function render()
     {
         return view('livewire.list-exercise-category')->with([
-            'exerciseCategories' => ExerciseCategory::all()
+            'exerciseCategories' => ExerciseCategory::whereUserId(auth()->id())->get()
         ]);
     }
 }

@@ -144,7 +144,7 @@
             </div>
 
             <div class="mt-3">
-                <a href="{{ route('training-plans.index') }}" class="btn btn-secondary w-100">Zurück</a>
+                <a wire:navigate href="{{ route('training-plans.index') }}" class="btn btn-secondary w-100">Zurück</a>
             </div>
         </form>
     </main>

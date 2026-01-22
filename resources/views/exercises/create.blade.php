@@ -34,5 +34,5 @@
             </div>
         @endif
     </form>
-    <a href="{{ route('exercises.index') }}" class="btn btn-secondary mt-3">Zurück</a>
+    <a wire:navigate href="{{ route('exercises.index') }}" class="btn btn-secondary mt-3">Zurück</a>
 @endsection

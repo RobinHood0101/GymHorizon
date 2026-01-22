@@ -44,7 +44,7 @@ class ExerciseCategoryPolicy
      */
     public function delete(User $user, ExerciseCategory $exerciseCategory): bool
     {
-        return false;
+        return $user->id === $exerciseCategory->user_id;
     }
 
     /**
