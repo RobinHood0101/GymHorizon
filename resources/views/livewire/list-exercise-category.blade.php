@@ -96,4 +96,8 @@
             </div>
         </div>
     @endforeach
+
+    <div class="mt-4">
+        {{ $exerciseCategories->links() }}
+    </div>
 </div>

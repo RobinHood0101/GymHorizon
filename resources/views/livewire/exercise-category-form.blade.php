@@ -12,7 +12,15 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                 Schliessen
             </button>
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">{{ $buttonText }}</button>
+            <button
+                type="submit"
+                class="btn btn-primary"
+                data-bs-dismiss="modal"
+                wire:dirty.remove.attr="disabled"
+                disabled
+            >
+                {{ $buttonText }}
+            </button>
         </div>
     </form>
 </div>

@@ -5,9 +5,13 @@ namespace App\Livewire;
 use App\Models\ExerciseCategory;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ListExerciseCategory extends Component
 {
+    use withPagination;
+    protected $paginationTheme = 'bootstrap';
+
     public string $name;
 
     #[On('exercise-category-created')]
@@ -31,7 +35,7 @@ class ListExerciseCategory extends Component
     public function render()
     {
         return view('livewire.list-exercise-category')->with([
-            'exerciseCategories' => ExerciseCategory::whereUserId(auth()->id())->get()
+            'exerciseCategories' => ExerciseCategory::whereUserId(auth()->id())->paginate(5)
         ]);
     }
 }
