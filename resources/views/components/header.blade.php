@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md bg-dark py-3" data-bs-theme="dark">
-    <div class="container"><a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}"><span class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center me-2 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none">
+    <div class="container"><a wire:navigate class="navbar-brand d-flex align-items-center" href="{{ route('home') }}"><span class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center me-2 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none">
                         <path d="M20.2739 9.86883L16.8325 4.95392L18.4708 3.80676L21.9122 8.72167L20.2739 9.86883Z" fill="currentColor"></path>
                         <path d="M18.3901 12.4086L16.6694 9.95121L8.47783 15.687L10.1985 18.1444L8.56023 19.2916L3.97162 12.7383L5.60992 11.5912L7.33068 14.0487L15.5222 8.31291L13.8015 5.8554L15.4398 4.70825L20.0284 11.2615L18.3901 12.4086Z" fill="currentColor"></path>
                         <path d="M20.7651 7.08331L22.4034 5.93616L21.2562 4.29785L19.6179 5.445L20.7651 7.08331Z" fill="currentColor"></path>
@@ -16,12 +16,12 @@
                         <a class="dropdown-item {{ setActive('anatomy') ? 'active' : ''}}" href="{{ route('anatomy') }}" style="color: var(--bs-navbar-color);">Anatomie</a>
                     </div>
                 </li>
-                <li class="nav-item"><a class="nav-link {{ setActive('exercises*') ? 'text-white' : ''}}" href="{{ route('exercises.index') }}" style="color: var(--bs-navbar-color);">Übungen</a></li>
-                <li class="nav-item"><a class="nav-link {{ setActive('week-plans*') ? 'text-white' : ''}}" href="{{ route('week-plans.index') }}" style="color: var(--bs-navbar-color);">Wochenplan</a></li>
-                <li class="nav-item"><a class="nav-link {{ setActive('training-plans*') ? 'text-white' : ''}}" href="{{ route('training-plans.index') }}" style="color: var(--bs-navbar-color);">Trainingsplan</a></li>
+                <li class="nav-item"><a wire:navigate class="nav-link {{ setActive('exercises*') ? 'text-white' : ''}}" href="{{ route('exercises.index') }}" style="color: var(--bs-navbar-color);">Übungen</a></li>
+                <li class="nav-item"><a wire:navigate class="nav-link {{ setActive('week-plans*') ? 'text-white' : ''}}" href="{{ route('week-plans.index') }}" style="color: var(--bs-navbar-color);">Wochenplan</a></li>
+                <li class="nav-item"><a wire:navigate class="nav-link {{ setActive('training-plans*') ? 'text-white' : ''}}" href="{{ route('training-plans.index') }}" style="color: var(--bs-navbar-color);">Trainingsplan</a></li>
             </ul>
             @guest
-                <a class="btn btn-primary ms-md-2 me-2" role="button" href="{{ route('register') }}">Registrieren</a><a class="btn btn-primary ms-md-2" role="button" href="{{ route('login') }}">Einloggen</a>
+                <a wire:navigate class="btn btn-primary ms-md-2 me-2" role="button" href="{{ route('register') }}">Registrieren</a><a wire:navigate class="btn btn-primary ms-md-2" role="button" href="{{ route('login') }}">Einloggen</a>
             @endguest
             @auth
 {{--                <div--}}

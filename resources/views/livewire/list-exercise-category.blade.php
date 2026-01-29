@@ -9,7 +9,7 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-start mb-3">
                     <h2 class="card-title">{{ $exerciseCategory->name }}</h2>
-                    <div class="d-flex flex-column gap-2">
+                    <div class="d-flex flex-column gap-2" x-data="{ showDeleteModal: false }">
                         <button
                                 type="button"
                                 class="btn btn-warning btn-sm"
@@ -41,10 +41,29 @@
                         </div>
                         <button
                                 class="btn btn-danger btn-sm"
-                                wire:click="delete({{ $exerciseCategory->id }})"
-                                wire:confirm="Sind Sie sicher, dass Sie diese Kategorie löschen wollen?">
+                                type="button"
+                                @click="
+                                    showDeleteModal = true;
+                                ">
                             Löschen
                         </button>
+                        <div class="modal" tabindex="-1" x-show="showDeleteModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Löschen?</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Möchten Sie diese Kategorie wirklich löschen?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button @click="showDeleteModal = false">Abbrechen</button>
+                                        <button @click="$wire.delete({{ $exerciseCategory->id }})">Löschen</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 @if($exerciseCategory->exercises->isEmpty())
