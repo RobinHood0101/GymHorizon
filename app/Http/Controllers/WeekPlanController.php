@@ -43,6 +43,10 @@ class WeekPlanController extends Controller
         ]);
 
         foreach ($request->days as $day) {
+            // check if user can access dayPlan
+            if (!auth()->user()->can('view', DayPlan::find($day['id']))) {
+                abort(403);
+            }
             if(!is_numeric($day['training_plan_id'])) {
                 $day['training_plan_id'] = null;
             }
