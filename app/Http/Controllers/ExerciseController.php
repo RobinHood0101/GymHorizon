@@ -54,6 +54,10 @@ class ExerciseController extends Controller
      */
     public function store(StoreExerciseRequest $request): RedirectResponse
     {
+        if (ExerciseCategory::find($request->category_id)->user_id !== auth()->id()) {
+            abort(403);
+        }
+
         Exercise::create([
             'name' => $request->name,
             'description' => $request->description,

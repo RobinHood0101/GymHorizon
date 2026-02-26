@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Exercise;
+use App\Models\DayPlan;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class ExercisePolicy
+class DayPlanPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,9 +19,9 @@ class ExercisePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Exercise $exercise): bool
+    public function view(User $user, DayPlan $dayPlan): bool
     {
-        return $user->id === $exercise->user_id;
+        return $user->id === $dayPlan->training_plan->user_id;
     }
 
     /**
@@ -29,21 +29,21 @@ class ExercisePolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        return false;
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Exercise $exercise): bool
+    public function update(User $user, DayPlan $dayPlan): bool
     {
-        return $user->id === $exercise->user_id;
+        return false;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Exercise $exercise): bool
+    public function delete(User $user, DayPlan $dayPlan): bool
     {
         return false;
     }
@@ -51,7 +51,7 @@ class ExercisePolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Exercise $exercise): bool
+    public function restore(User $user, DayPlan $dayPlan): bool
     {
         return false;
     }
@@ -59,8 +59,8 @@ class ExercisePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Exercise $exercise): bool
+    public function forceDelete(User $user, DayPlan $dayPlan): bool
     {
-        return $user->id === $exercise->user_id;
+        return false;
     }
 }

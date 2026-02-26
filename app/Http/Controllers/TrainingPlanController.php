@@ -6,6 +6,7 @@ use App\Http\Requests\TrainingPlan\DestroyTrainingPlanRequest;
 use App\Http\Requests\TrainingPlan\EditTrainingPlanRequest;
 use App\Http\Requests\TrainingPlan\StoreTrainingPlanRequest;
 use App\Http\Requests\TrainingPlan\UpdateTrainingPlanRequest;
+use App\Models\Exercise;
 use App\Models\ExerciseCategory;
 use App\Models\TrainingPlan;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -43,7 +44,7 @@ class TrainingPlanController extends Controller
      */
     public function store(StoreTrainingPlanRequest $request): RedirectResponse
     {
-        $plan = Auth::user()->trainingPlans()->create([
+        $plan = Auth::user()?->trainingPlans()->create([
             'name' => $request->name,
             'duration' => $request->duration,
             'notes' => $request->notes,
@@ -54,13 +55,20 @@ class TrainingPlanController extends Controller
         if ($request->has('exercises')) {
             $pivotData = [];
 
+            // TODO: Implement auth because now every exercise_id can be passed
             foreach ($request->exercises as $i => $exerciseId) {
+                // chech if user has access to this exercise
+                if (!auth()->user()->can('view', Exercise::find($exerciseId))) {
+                    abort(403);
+                }
                 $pivotData[$exerciseId] = [
                     'weight' => $request->weights[$i] ?? null,
                     'repetitions' => $request->reps[$i] ?? null,
                     'sets' => $request->sets[$i] ?? null,
                 ];
             }
+
+//            dd($pivotData);
 
             $plan->exercises()->sync($pivotData);
         }
