@@ -36,7 +36,6 @@
     },
     removeExercise(id) {
         this.exercises = this.exercises.filter(ex => ex.id !== id);
-        console.log('delete:' + id);
     },
     isAlreadySelected(exerciseId) {
         for (const exercise of this.exercises) {

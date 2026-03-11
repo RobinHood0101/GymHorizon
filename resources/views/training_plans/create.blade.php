@@ -3,6 +3,8 @@
 @section('title', 'Trainingsplan erstellen | Gymhorizon')
 
 @push('scripts-head')
+    {{-- AlpineJS --}}
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script>
         const exerciseCategories = @json($exerciseCategories, JSON_THROW_ON_ERROR);
     </script>
@@ -38,11 +40,9 @@
             }
         );
         this.exerciseCount++;
-        console.log(this.exercises);
     },
     removeExercise(id) {
         this.exercises = this.exercises.filter(ex => ex.id !== id);
-        console.log('delete:' + id);
     },
     isAlreadySelected(exerciseId) {
         for (const exercise of this.exercises) {
