@@ -179,4 +179,7 @@ return [
     'sort_field' => 'email',
     'sort_direction' => 'asc',
 
+    'admin_name' => env('STATAMIC_ADMIN_NAME', 'admin'),
+    'admin_password' => env('STATAMIC_ADMIN_PASSWORD'),
+    'admin_email' => env('STATAMIC_ADMIN_EMAIL')
 ];
