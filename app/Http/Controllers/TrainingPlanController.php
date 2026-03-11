@@ -30,9 +30,8 @@ class TrainingPlanController extends Controller
      */
     public function create()
     {
-        if (Auth::user()->cannot('create', TrainingPlan::class)) {
-            abort(403);
-        }
+        $this->authorize('create', TrainingPlan::class);
+
         $exerciseCategories = ExerciseCategory::whereUserId(Auth::user()->id)
             ->get()
             ->load('exercises');
@@ -44,7 +43,7 @@ class TrainingPlanController extends Controller
      */
     public function store(StoreTrainingPlanRequest $request): RedirectResponse
     {
-        $plan = Auth::user()?->trainingPlans()->create([
+        $plan = Auth::user()->trainingPlans()->create([
             'name' => $request->name,
             'duration' => $request->duration,
             'notes' => $request->notes,
@@ -55,10 +54,9 @@ class TrainingPlanController extends Controller
         if ($request->has('exercises')) {
             $pivotData = [];
 
-            // TODO: Implement auth because now every exercise_id can be passed
             foreach ($request->exercises as $i => $exerciseId) {
-                // chech if user has access to this exercise
-                if (!auth()->user()->can('view', Exercise::find($exerciseId))) {
+                // check if user has access to this exercise
+                if (!auth()->user()->can('view', Exercise::findOrFail($exerciseId))) {
                     abort(403);
                 }
                 $pivotData[$exerciseId] = [
@@ -67,8 +65,6 @@ class TrainingPlanController extends Controller
                     'sets' => $request->sets[$i] ?? null,
                 ];
             }
-
-//            dd($pivotData);
 
             $plan->exercises()->sync($pivotData);
         }
@@ -102,9 +98,9 @@ class TrainingPlanController extends Controller
     public function update(UpdateTrainingPlanRequest $request, TrainingPlan $trainingPlan): RedirectResponse
     {
         $trainingPlan->update([
-            'name' => $request->get('name'),
-            'duration' => $request->get('duration'),
-            'notes' => $request->get('notes'),
+            'name' => $request->name,
+            'duration' => $request->duration,
+            'notes' => $request->notes,
             'user_id' => Auth::id(),
         ]);
 
@@ -113,6 +109,10 @@ class TrainingPlanController extends Controller
             $pivotData = [];
 
             foreach ($request->exercises as $i => $exerciseId) {
+                // check if user has access to this exercise
+                if (!auth()->user()->can('view', Exercise::findOrFail($exerciseId))) {
+                    abort(403);
+                }
                 $pivotData[$exerciseId] = [
                     'weight' => $request->weights[$i] ?? null,
                     'repetitions' => $request->reps[$i] ?? null,

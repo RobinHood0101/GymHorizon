@@ -10,6 +10,16 @@
 @endsection
 
 @section('content')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form action="{{ route('week-plans.store') }}" method="POST">
         @csrf
 
@@ -35,7 +45,7 @@
                         <td>
                             <select class="form-select" name="days[{{ $index }}][training_plan_id]">
                                 <optgroup label="Wähle einen Trainingsplan">
-                                    <option value="rest" selected>Rest Day</option>
+                                    <option value="" selected>Rest Day</option>
                                     @foreach($trainingPlans as $trainingPlan)
                                         <option value="{{$trainingPlan->id}}">{{ $trainingPlan->name }}</option>
                                     @endforeach

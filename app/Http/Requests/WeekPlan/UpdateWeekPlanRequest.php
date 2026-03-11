@@ -3,6 +3,7 @@
 namespace App\Http\Requests\WeekPlan;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateWeekPlanRequest extends FormRequest
 {
@@ -22,8 +23,24 @@ class UpdateWeekPlanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'days' => 'required|array',
-            'title' => 'required|string',
+            'title' => 'required|string|max:255',
+            'days' => 'required|array|min:1',
+            'days.*.id' => [
+                'required',
+                'integer',
+                Rule::exists('day_plans', 'id')->where(function ($query) {
+                    $query->where('week_plan_id', $this->route('week_plan')->id);
+                }),
+            ],
+            'days.*.day' => 'required|string|max:50',
+            'days.*.training_plan_id' => [
+                'nullable',
+                'integer',
+//                Rule::exists('training_plans', 'id')->where(function ($query) {
+//                    $query->where('user_id', $this->user()->id);
+//                }),
+            ],
+            'days.*.notes' => 'nullable|string|max:1000',
         ];
     }
 }

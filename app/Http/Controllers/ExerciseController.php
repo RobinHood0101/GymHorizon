@@ -40,13 +40,15 @@ class ExerciseController extends Controller
      */
     public function create(Request $request)
     {
-        // TODO: doesnt work, fix auth, every user can create exercises for other users
-        if (Auth::user()->cannot('create', Exercise::class)) {
-           abort(403);
+        $this->authorize('create', Exercise::class);
+
+        $category = ExerciseCategory::findOrFail($request->query('category'));
+
+        if ($category->user_id !== Auth::id()) {
+            abort(403);
         }
 
-//        $this->authorize('view',  Exercise::class);
-        return view('exercises.create', ['category' => ExerciseCategory::findOrFail($request->get('category'))]);
+        return view('exercises.create', ['category' => $category]);
     }
 
     /**
@@ -54,7 +56,9 @@ class ExerciseController extends Controller
      */
     public function store(StoreExerciseRequest $request): RedirectResponse
     {
-        if (ExerciseCategory::find($request->category_id)->user_id !== auth()->id()) {
+        // check if user can create exercise for chosen category
+        $category = ExerciseCategory::findOrFail($request->category_id);
+        if ($category->user_id !== Auth::id()) {
             abort(403);
         }
 
@@ -91,6 +95,12 @@ class ExerciseController extends Controller
      */
     public function update(UpdateExerciseRequest $request, Exercise $exercise): RedirectResponse
     {
+        // check if user can update exercise for chosen category
+        $category = ExerciseCategory::findOrFail($request->category_id);
+        if ($category->user_id !== Auth::id()) {
+            abort(403);
+        }
+
         $exercise->update([
             'name' => $request->name,
             'description' => $request->description,

@@ -35,7 +35,7 @@ class DayPlan extends Model
         ];
     }
 
-    public function weekPlans(): BelongsTo
+    public function weekPlan(): BelongsTo
     {
         return $this->belongsTo(WeekPlan::class);
     }

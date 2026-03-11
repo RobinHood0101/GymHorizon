@@ -21,7 +21,7 @@ class DayPlanPolicy
      */
     public function view(User $user, DayPlan $dayPlan): bool
     {
-        return $user->id === $dayPlan->training_plan->user_id;
+        return false;
     }
 
     /**

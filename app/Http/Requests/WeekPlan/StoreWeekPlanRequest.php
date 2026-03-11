@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\WeekPlan;
 
-use App\Models\TrainingPlan;
 use App\Models\WeekPlan;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreWeekPlanRequest extends FormRequest
 {
@@ -24,11 +24,16 @@ class StoreWeekPlanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'days' => 'required|array',
-            'title' => 'required|string',
-
+            'title' => 'required|string|max:255',
+            'days' => 'required|array|min:1',
             'days.*.day' => 'required|string|max:50',
-            'days.*.training_plan_id' => 'nullable',
+            'days.*.training_plan_id' => [
+                'nullable',
+                'integer',
+//                Rule::exists('training_plans', 'id')->where(function ($query) {
+//                    $query->where('user_id', $this->user()->id);
+//                }),
+            ],
             'days.*.notes' => 'nullable|string|max:1000',
         ];
     }

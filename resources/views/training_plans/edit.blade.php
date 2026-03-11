@@ -54,7 +54,7 @@
             @method('PUT')
 
             <div class="mb-3">
-                <label class="form-label" for="plan_name">Name</label>
+                <label class="form-label" for="name">Name</label>
                 <input class="form-control" type="text" id="name" name="name" value="{{$plan->name}}" required  autofocus/>
                 @error('name')
                 <div class="text-danger small">{{ $message }}</div>

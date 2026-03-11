@@ -7,11 +7,14 @@ use App\Http\Requests\WeekPlan\StoreWeekPlanRequest;
 use App\Http\Requests\WeekPlan\UpdateWeekPlanRequest;
 use App\Models\DayPlan;
 use App\Models\WeekPlan;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
 class WeekPlanController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
@@ -26,9 +29,7 @@ class WeekPlanController extends Controller
      */
     public function create()
     {
-        if (Auth::user()->cannot('create', WeekPlan::class)) {
-            abort(403);
-        }
+        $this->authorize('create', WeekPlan::class);
         return view('week_plans.create');
     }
 
@@ -43,13 +44,6 @@ class WeekPlanController extends Controller
         ]);
 
         foreach ($request->days as $day) {
-            // check if user can access dayPlan
-            if (!auth()->user()->can('view', DayPlan::find($day['id']))) {
-                abort(403);
-            }
-            if(!is_numeric($day['training_plan_id'])) {
-                $day['training_plan_id'] = null;
-            }
             $weekPlan->dayPlans()->create([
                 'day'              => $day['day'],
                 'training_plan_id' => $day['training_plan_id'],
@@ -72,6 +66,7 @@ class WeekPlanController extends Controller
      */
     public function edit(WeekPlan $weekPlan)
     {
+        $this->authorize('update', $weekPlan);
         $weekPlan->load('dayPlans');
         return view('week_plans.edit', compact('weekPlan'));
     }
@@ -87,26 +82,14 @@ class WeekPlanController extends Controller
 
         // Update existing day plans and create new ones
         $existingDayPlanIds = $weekPlan->dayPlans->pluck('id')->toArray();
-        $submittedDayPlanIds = array_filter(array_column($request->days, 'id'));
-
-        // Delete day plans that were removed
-        $dayPlansToDelete = array_diff($existingDayPlanIds, $submittedDayPlanIds);
-        DayPlan::destroy($dayPlansToDelete);
 
         foreach ($request->days as $day) {
             if (isset($day['id']) && in_array($day['id'], $existingDayPlanIds)) {
                 // Update existing day plan
-                $dayPlan = DayPlan::find($day['id']);
+                $dayPlan = DayPlan::findOrFail($day['id']);
                 $dayPlan->update([
                     'day'              => $day['day'],
-                    'training_plan_id' => is_numeric($day['training_plan_id']) ? $day['training_plan_id'] : null,
-                    'notes'            => $day['notes'],
-                ]);
-            } else {
-                // Create new day plan
-                $weekPlan->dayPlans()->create([
-                    'day'              => $day['day'],
-                    'training_plan_id' => is_numeric($day['training_plan_id']) ? $day['training_plan_id'] : null,
+                    'training_plan_id' => $day['training_plan_id'],
                     'notes'            => $day['notes'],
                 ]);
             }

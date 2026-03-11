@@ -10,6 +10,16 @@
 @endsection
 
 @section('content')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form action="{{ route('week-plans.update', $weekPlan->id) }}" method="POST">
         @csrf
         @method('PUT')
@@ -37,7 +47,7 @@
                         <td>
                             <select class="form-select" name="days[{{ $index }}][training_plan_id]">
                                 <optgroup label="Wähle einen Trainingsplan">
-                                    <option value="rest">Rest Day</option>
+                                    <option value="">Rest Day</option>
                                     @foreach($trainingPlans as $trainingPlan)
                                         <option value="{{$trainingPlan->id}}" @selected($trainingPlan->id === $dayPlan->training_plan_id)>{{ $trainingPlan->name }}</option>
                                     @endforeach
@@ -46,8 +56,9 @@
                         </td>
                         <td>
                             <input class="form-control" type="text" name="days[{{ $index }}][notes]"
-                                   value="{{  $weekPlan->dayPlans->firstWhere('day', $dayPlan->day)->notes ?? '' }}">
+                                   value="{{ $dayPlan->notes }}">
                             <input type="hidden" name="days[{{ $index }}][day]" value="{{ $dayPlan->day }}">
+                            <input type="hidden" name="days[{{ $index }}][id]" value="{{ $dayPlan->id }}">
                         </td>
                     </tr>
                 @endforeach
@@ -55,7 +66,7 @@
             </table>
         </div>
         <input class="btn btn-primary" type="submit" value="Speichern"/>
-        @error('plan_name')
+        @error('title')
         <div class="text-danger">{{ $message }}</div>
         @enderror
     </form>
