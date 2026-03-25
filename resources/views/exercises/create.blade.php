@@ -4,7 +4,7 @@
 
 @section('hero')
     <header>
-        <h1 style="padding: 15px;text-align: center;">Übung erstellen für {{ $category->name }}</h1>
+        <h1 class="p-3 text-center">Übung erstellen für {{ $category->name }}</h1>
     </header>
 @endsection
 

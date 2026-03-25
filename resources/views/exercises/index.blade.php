@@ -4,19 +4,6 @@
 
 @push('styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <style>
-        main {
-            padding: 2rem 1rem;
-        }
-
-        .category-card {
-            margin-bottom: 2rem;
-        }
-
-        .table th {
-            background-color: var(--bs-table-light-bg);
-        }
-    </style>
 @endpush
 
 @section('hero')
@@ -26,7 +13,8 @@
 @endsection
 
 @section('content')
-    @if(session('success'))
+    <div class="py-4 px-2">
+        @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Schließen"></button>
@@ -63,7 +51,7 @@
                 @else
                     <div class="table-responsive">
                         <table class="table table-hover table-bordered">
-                            <thead class="table-light">
+                            <thead class="table-light header-light-bg">
                             <tr>
                                 <th>Übung</th>
                                 <th>Bemerkung</th>
@@ -76,7 +64,7 @@
                                     <td>{{ $exercise->name }}</td>
                                     <td>{{ $exercise->description }}</td>
                                     <td>{{ $exercise->place }}</td>
-                                    <td class="text-center" style="width: 120px;">
+                                    <td class="text-center w-120">
                                         <div class="d-flex justify-content-center gap-2">
                                             <!-- edit -->
                                             <a href="{{ route('exercises.edit', $exercise->id) }}" class="btn btn-sm btn-warning" title="Bearbeiten">

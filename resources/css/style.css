@@ -12,3 +12,35 @@ body {
 main {
     flex: 1;
 }
+
+.hero-parallax {
+    height: 600px;
+}
+
+.max-w-350 {
+    max-width: 350px;
+}
+
+.img-h-200 {
+    height: 200px;
+}
+
+.text-body-bg {
+    color: var(--bs-body-bg);
+}
+
+.text-border {
+    color: var(--bs-border-color);
+}
+
+.w-120 {
+    width: 120px;
+}
+
+.category-card, .weekplan-card, .plan-card {
+    margin-bottom: 2rem;
+}
+
+.table-light-header th, .header-light-bg th {
+    background-color: var(--bs-table-light-bg);
+}

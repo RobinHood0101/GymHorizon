@@ -5,7 +5,7 @@
 
 @section('hero')
     <header>
-        <h1 style="padding: 15px;text-align: center;">Anatomie</h1>
+        <h1 class="p-3 text-center">Anatomie</h1>
     </header>
 @endsection
 
@@ -15,7 +15,7 @@
             @foreach($entries as $entry)
                 <div class="col">
                     <div>
-                        <img class="rounded img-fluid object-fit-cover d-block w-100" style="height: 200px;" src="{{ asset('/assets/' . $entry->image[0]) }}"  alt="img"/>
+                        <img class="rounded img-fluid object-fit-cover d-block w-100 img-h-200" src="{{ asset('/assets/' . $entry->image[0]) }}"  alt="img"/>
                         <div class="py-4">
                             <h4>{!! $entry->title !!}</h4>
                             <p>{!! $entry->content !!}</p>

@@ -11,14 +11,14 @@
                 <li class="nav-item dropdown">
                     <a class="dropdown-toggle nav-link {{ setActive(['tips', 'nutrition', 'anatomy'])}}" aria-expanded="false" data-bs-toggle="dropdown" href="#">Allgemein </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item {{ setActive('tips') ? 'active' : ''}}" href="{{ route('tips') }}" style="color: var(--bs-navbar-color);">Tipps</a>
-                        <a class="dropdown-item {{ setActive('nutrition') ? 'active' : ''}}" href="{{ route('nutrition') }}" style="color: var(--bs-navbar-color);">Ernährung</a>
-                        <a class="dropdown-item {{ setActive('anatomy') ? 'active' : ''}}" href="{{ route('anatomy') }}" style="color: var(--bs-navbar-color);">Anatomie</a>
+                        <a class="dropdown-item {{ setActive('tips') ? 'active' : ''}}" href="{{ route('tips') }}">Tipps</a>
+                        <a class="dropdown-item {{ setActive('nutrition') ? 'active' : ''}}" href="{{ route('nutrition') }}">Ernährung</a>
+                        <a class="dropdown-item {{ setActive('anatomy') ? 'active' : ''}}" href="{{ route('anatomy') }}">Anatomie</a>
                     </div>
                 </li>
-                <li class="nav-item"><a class="nav-link {{ setActive('exercises*') ? 'text-white' : ''}}" href="{{ route('exercises.index') }}" style="color: var(--bs-navbar-color);">Übungen</a></li>
-                <li class="nav-item"><a class="nav-link {{ setActive('week-plans*') ? 'text-white' : ''}}" href="{{ route('week-plans.index') }}" style="color: var(--bs-navbar-color);">Wochenplan</a></li>
-                <li class="nav-item"><a class="nav-link {{ setActive('training-plans*') ? 'text-white' : ''}}" href="{{ route('training-plans.index') }}" style="color: var(--bs-navbar-color);">Trainingsplan</a></li>
+                <li class="nav-item"><a class="nav-link {{ setActive('exercises*') ? 'text-white' : ''}}" href="{{ route('exercises.index') }}">Übungen</a></li>
+                <li class="nav-item"><a class="nav-link {{ setActive('week-plans*') ? 'text-white' : ''}}" href="{{ route('week-plans.index') }}">Wochenplan</a></li>
+                <li class="nav-item"><a class="nav-link {{ setActive('training-plans*') ? 'text-white' : ''}}" href="{{ route('training-plans.index') }}">Trainingsplan</a></li>
             </ul>
             @guest
                 <a class="btn btn-primary ms-md-2 me-2" role="button" href="{{ route('register') }}">Registrieren</a><a class="btn btn-primary ms-md-2" role="button" href="{{ route('login') }}">Einloggen</a>

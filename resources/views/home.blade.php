@@ -7,12 +7,12 @@
             <x-guide></x-guide>
     @endif
     <section>
-        <div data-bss-parallax-bg="true" style="height: 600px;background: url('{{ asset('assets/img/gym.jpg') }}');">
+        <div data-bss-parallax-bg="true" class="hero-parallax" style="background-image: url('{{ asset('assets/img/gym.jpg') }}');">
             <div class="container h-100">
                 <div class="row h-100">
                     <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
-                        <div style="max-width: 350px;">
-                            <h1 class="text-uppercase fw-bold" style="color: var(--bs-body-bg);">
+                        <div class="max-w-350">
+                            <h1 class="text-uppercase fw-bold text-body-bg">
                                 @guest
                                     ERFÜLLE DEINE TRÄUME!
                                 @endguest
@@ -20,7 +20,7 @@
                                     Willkommen {{ Auth::user()->name }}!
                                 @endauth
                             </h1>
-                            <p class="my-3" style="color: var(--bs-body-bg);">Alles rund ums Thema Fitness und Gym</p>
+                            <p class="my-3 text-body-bg">Alles rund ums Thema Fitness und Gym</p>
                             @guest
                                 <a class="btn btn-primary btn-lg me-2" role="button" href="{{ route('register') }}">Starte
                                     jetzt</a>

@@ -3,15 +3,6 @@
 @section('title', 'Wochenplan | Gymhorizon')
 
 @push('styles')
-    <style>
-        main {
-            padding: 2rem 1rem;
-        }
-
-        .weekplan-card {
-            margin-bottom: 2rem;
-        }
-    </style>
 @endpush
 
 @section('hero')
@@ -21,7 +12,8 @@
 @endsection
 
 @section('content')
-    @if(session('success'))
+    <div class="py-4 px-2">
+        @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Schließen"></button>

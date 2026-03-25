@@ -4,7 +4,7 @@
 
 @section('hero')
     <header>
-        <h1 style="padding: 15px;text-align: center;">Kontakt</h1>
+        <h1 class="p-3 text-center">Kontakt</h1>
     </header>
 @endsection
 
@@ -49,7 +49,7 @@
                 </div>
             </div>
             @if ($success)
-                <div class=" p-2" style="color: var(--bs-success);">
+                <div class="p-2 text-success">
                     Nachricht erfolgreich erfasst.
                 </div>
             @endif
