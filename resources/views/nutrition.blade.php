@@ -3,13 +3,6 @@
 
 @section('title', 'Ernährung | GymHorizon')
 
-@php
-    $entries = Entry::query()
-          ->where('collection', 'nutrition')
-          ->limit(5)
-          ->get();
-@endphp
-
 @section('content')
     <div class="container py-4 py-xl-5">
         <div class="row mb-5">
@@ -26,7 +19,7 @@
                             <img class="rounded img-fluid d-block w-100 fit-cover"
                                  alt="{{ $entry->title }}"
                                  style="height: 200px;max-width: 100%;"
-                                 src="{{ $entry->image[0] }}">
+                                 src="{{ asset('/assets/' . $entry->image[0]) }}">
                         </div>
                         <div class="py-4 py-lg-0 px-lg-4">
                             <h4>{!! $entry->title !!}</h4>
