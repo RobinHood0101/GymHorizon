@@ -13,13 +13,13 @@ Route::get('/', function (Request $request) {
     $first_login = $request->boolean('first_login', false);
     return view('home', ['first_login' => $first_login]);
 })->name('home');
-Route::get('/anatomie', function () {
+Route::get('/anatomy', function () {
     return view('anatomy');
 })->name('anatomy');
-Route::get('/ernaehrung', function () {
+Route::get('/nutrition', function () {
     return view('nutrition');
 })->name('nutrition');
-Route::get('/tipps', function () {
+Route::get('/tips', function () {
     return view('tips');
 })->name('tips');
 Route::get('/contact', function () {
