@@ -3,8 +3,6 @@
 @section('title', 'Trainingsplan erstellen | Gymhorizon')
 
 @push('scripts-head')
-    {{-- AlpineJS --}}
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script>
         const exerciseCategories = @json($exerciseCategories, JSON_THROW_ON_ERROR);
     </script>
@@ -32,14 +30,13 @@
     addNewExercise() {
         this.exercises.push(
             {
-                id: this.exerciseCount+1,
-                exercise_id: 0,
+                id: Date.now(),
+                exercise_id: null,
                 weight: 0,
                 repetitions: 0,
                 sets: 0
             }
         );
-        this.exerciseCount++;
     },
     removeExercise(id) {
         this.exercises = this.exercises.filter(ex => ex.id !== id);
@@ -108,17 +105,17 @@
 
                             <div class="col-lg-2 col-md-4">
                                 <label class="form-label mb-1">Gewicht (kg)</label>
-                                <input type="number" class="form-control" name="weights[]">
+                                <input type="number" class="form-control" name="weights[]" x-model="exercise.weight">
                             </div>
 
                             <div class="col-lg-2 col-md-4">
                                 <label class="form-label mb-1">Wdh.</label>
-                                <input type="number" class="form-control" name="reps[]">
+                                <input type="number" class="form-control" name="reps[]" x-model="exercise.repetitions">
                             </div>
 
                             <div class="col-lg-2 col-md-4">
                                 <label class="form-label mb-1">Sätze</label>
-                                <input type="number" class="form-control" name="sets[]">
+                                <input type="number" class="form-control" name="sets[]" x-model="exercise.sets">
                             </div>
 
                             <div class="col-lg-3 col-md-4 d-flex justify-content-end">

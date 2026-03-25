@@ -3,8 +3,6 @@
 @section('title', 'Trainingsplan bearbeiten | Gymhorizon')
 
 @push('scripts-head')
-    {{-- AlpineJS --}}
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script>
         const exerciseCategories = @json($exerciseCategories, JSON_THROW_ON_ERROR);
         const existingExercises = @json($plan->exercises, JSON_THROW_ON_ERROR);
@@ -21,18 +19,23 @@
     <main class="container d-flex justify-content-center align-items-start" x-data="{
     // Neue Uebungen in Object speichern und dann über dieses Object einen Loop machen und html ausgeben
     exerciseCount: 2,
-    exercises: existingExercises,
+    exercises: existingExercises.map(ex => ({
+        id: ex.id,
+        exercise_id: ex.id,
+        weight: ex.pivot.weight,
+        repetitions: ex.pivot.repetitions,
+        sets: ex.pivot.sets
+    })),
     addNewExercise() {
         this.exercises.push(
             {
-                id: this.exerciseCount+1,
-                exercise_id: 2,
-                weight: 20,
-                repetitions: 10,
-                sets: 3
+                id: Date.now(),
+                exercise_id: null,
+                weight: 0,
+                repetitions: 0,
+                sets: 0
             }
         );
-        this.exerciseCount++;
     },
     removeExercise(id) {
         this.exercises = this.exercises.filter(ex => ex.id !== id);
@@ -93,7 +96,7 @@
                                         <optgroup :label="exerciseCategory.name">
                                             <template x-for="exerciseSelect in exerciseCategory.exercises">
                                                 <template x-if="!isAlreadySelected(exerciseSelect.id) || exercise.exercise_id == exerciseSelect.id">
-                                                    <option :value="exerciseSelect.id" :selected="exerciseSelect.id === exercise.id"><span x-text="exerciseSelect.name"></span></option>
+                                                    <option :value="exerciseSelect.id" :selected="exerciseSelect.id == exercise.exercise_id"><span x-text="exerciseSelect.name"></span></option>
                                                 </template>
                                             </template>
                                         </optgroup>
@@ -103,17 +106,17 @@
 
                             <div class="col-lg-2 col-md-4">
                                 <label class="form-label mb-1">Gewicht (kg)</label>
-                                <input type="number" class="form-control" name="weights[]" :value="exercise.pivot.weight">
+                                <input type="number" class="form-control" name="weights[]" x-model="exercise.weight">
                             </div>
 
                             <div class="col-lg-2 col-md-4">
                                 <label class="form-label mb-1">Wdh.</label>
-                                <input type="number" class="form-control" name="reps[]" :value="exercise.pivot.repetitions">
+                                <input type="number" class="form-control" name="reps[]" x-model="exercise.repetitions">
                             </div>
 
                             <div class="col-lg-2 col-md-4">
                                 <label class="form-label mb-1">Sätze</label>
-                                <input type="number" class="form-control" name="sets[]" :value="exercise.pivot.sets">
+                                <input type="number" class="form-control" name="sets[]" x-model="exercise.sets">
                             </div>
 
                             <div class="col-lg-3 col-md-4 d-flex justify-content-end">

@@ -5,18 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>@yield('title', 'GymHorizon')</title>
 
-    {{-- Global CSS --}}
-    <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/fonts/ionicons.min.css') }}">
-{{--    <link rel="stylesheet" href="{{ asset('assets/css/Advanced-NavBar---Multi-dropdown.css') }}">--}}
-{{--    <link rel="stylesheet" href="{{ asset('assets/css/Bootstrap-DataTables.css') }}">--}}
-{{--    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" crossorigin="anonymous">--}}
-{{--    <link rel="stylesheet" href="{{ asset('assets/css/NAV-1.css') }}">--}}
-    <link rel="stylesheet" href="{{ asset('assets/css/Navbar-Right-Links-Dark-icons.css') }}">
-{{--    <link rel="stylesheet" href="{{ asset('assets/css/Projects-Grid-Horizontal-images.css') }}">--}}
-{{--    <link rel="stylesheet" href="{{ asset('assets/css/Video-Parallax-Background-v2-multiple-parallax.css') }}">--}}
-    {{-- Custom CSS --}}
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     {{-- Site-specific styles --}}
     @stack('styles')
@@ -37,15 +26,6 @@
     </main>
 
     <x-footer />
-
-    {{-- Global scripts --}}
-    <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bs-init.js') }}"></script>
-{{--    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>--}}
-{{--    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>--}}
-{{--    <script src="{{ asset('assets/js/Bootstrap-DataTables-main.js') }}"></script>--}}
-{{--    <script src="{{ asset('assets/js/Advanced-NavBar---Multi-dropdown-main.js') }}"></script>--}}
-{{--    <script src="{{ asset('assets/js/Video-Parallax-Background-v2-multiple-parallax.js') }}"></script>--}}
 
     {{-- Site-specific scripts --}}
     @stack('scripts')
