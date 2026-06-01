@@ -23,6 +23,7 @@
         <a href="{{ route('week-plans.create') }}" class="btn btn-primary btn-lg">
             Neuen Wochenplan erstellen
         </a>
+        <x-pdf-export-button type="week_plans" label="Wochenplan als PDF exportieren"/>
     </div>
     @if($weekPlans->isEmpty())
         <div class="alert alert-info" role="alert">

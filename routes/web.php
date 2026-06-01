@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ExerciseCategoryController;
 use App\Http\Controllers\ExerciseController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\TrainingPlanController;
 use App\Http\Controllers\WeekPlanController;
 use Illuminate\Http\Request;
@@ -48,4 +49,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('exercise-categories', ExerciseCategoryController::class);
     Route::resource('week-plans', WeekPlanController::class);
     Route::resource('training-plans', TrainingPlanController::class);
+
+    Route::get('/pdf-download/{type}', [PDFController::class, 'buildPDF'])
+        ->name('pdf')
+        ->middleware(['throttle:2']);
+
+    Route::get('/exports/{file}', [PDFController::class, 'getPDF'])
+        ->name('exports');
 });

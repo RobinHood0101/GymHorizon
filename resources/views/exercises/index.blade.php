@@ -24,6 +24,7 @@
         <a href="{{ route('exercise-categories.create') }}" class="btn btn-primary btn-lg">
             Neue Kategorie erstellen
         </a>
+        <x-pdf-export-button type="exercises" label="Übungen als PDF exportieren"/>
     </div>
     @if($exerciseCategories->isEmpty())
         <div class="alert alert-info" role="alert">
