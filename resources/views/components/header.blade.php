@@ -48,7 +48,7 @@
 {{--                            Profil--}}
 {{--                        </a>--}}
 
-{{--                        <a class="dropdown-item" href="{{ route('home') }}">--}}x
+{{--                        <a class="dropdown-item" href="{{ route('home') }}">--}}
 {{--                            Einstellungen--}}
 {{--                        </a>--}}
 
