@@ -7,15 +7,15 @@
     "require": {
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "*",
-        "laravel/framework": "^12.0",
+        "laravel/framework": "^13.0",
         "laravel/sanctum": "^4.0",
-        "laravel/tinker": "^2.9",
+        "laravel/tinker": "^3.0",
         "livewire/livewire": "^4.0",
-        "statamic/cms": "^5.64",
-        "statamic/eloquent-driver": "^4.35"
+        "statamic/cms": "^6.0",
+        "statamic/eloquent-driver": "^5.0"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.16",
+        "barryvdh/laravel-debugbar": "^4.0",
         "fakerphp/faker": "^1.23",
         "laramint/laravel-brain": "*",
         "larastan/larastan": "^3.0",
@@ -26,7 +26,7 @@
         "laravel/telescope": "^5.16",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.0",
-        "pestphp/pest": "*",
+        "pestphp/pest": "^4.0",
         "pestphp/pest-plugin-browser": "*",
         "pestphp/pest-plugin-laravel": "*",
         "phpstan/phpstan": "*"
