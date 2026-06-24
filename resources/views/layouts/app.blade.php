@@ -29,5 +29,7 @@
 
     {{-- Site-specific scripts --}}
     @stack('scripts')
+
+    <noscript>JavaScript is required for full functionality of this site.</noscript>
 </body>
 </html>
